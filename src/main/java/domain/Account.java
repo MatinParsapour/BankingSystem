@@ -55,6 +55,12 @@ public class Account extends BaseEntity<Long> {
     @JoinColumn(name = IS_ACTIVE)
     private boolean isActive = false;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BankBranch bankBranch;
+
     public Account(String firstName, String lastName, int nationalCode,
                    LocalDate birthDate, String fatherName) {
         this.firstName = firstName;

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Inheritance
@@ -22,7 +23,7 @@ public class User extends BaseEntity<Long> {
     private static final String PHONE_NUMBER = "phone_number";
     private static final String NATIONAL_CODE = "national_code";
     private static final String BIRTH_DATE = "birth_date";
-    private static final String ACCOUNTS = "accounts";
+    private static final String USER_ACCOUNTS = "user_accounts";
 
     @JoinColumn(name = FIRST_NAME)
     private String firstName;
@@ -42,8 +43,17 @@ public class User extends BaseEntity<Long> {
     @JoinColumn(name = BIRTH_DATE)
     private String birthDate;
 
-    @OneToMany
-    @JoinColumn(name = ACCOUNTS)
-    private Set<Account> accounts;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private Set<Account> userAccounts;
 
+    public User(String firstName, String lastName, String email, String phoneNumber,
+                String nationalCode, String birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.nationalCode = nationalCode;
+        this.birthDate = birthDate;
+        userAccounts = new TreeSet<>();
+    }
 }

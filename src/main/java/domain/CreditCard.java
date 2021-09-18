@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -57,7 +54,7 @@ public class CreditCard extends BaseEntity<Long> {
     @JoinColumn(name = SECOND_PASSWORD)
     private int secondPassword;
 
-    @OneToOne(mappedBy = "creditCard")
+    @OneToOne(mappedBy = "creditCard",cascade = CascadeType.ALL)
     private Account account;
 
     @JoinColumn(name = BALANCE)

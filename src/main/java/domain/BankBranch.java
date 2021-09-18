@@ -19,7 +19,7 @@ public class BankBranch extends BaseEntity<Long> {
     private static final String EMPLOYEES = "employees";
     private static final String BRANCH_CODE = "branch_code";
     private static final String BANK_NAME = "bank_name";
-    private static final String ACCOUNTS = "accounts";
+    private static final String BANK_ACCOUNTS = "bank_accounts";
 
     @OneToOne
     @JoinColumn(name = CEO,unique = true)
@@ -35,7 +35,6 @@ public class BankBranch extends BaseEntity<Long> {
     @JoinColumn(name = BANK_NAME)
     private String bankName;
 
-    @OneToMany
-    @JoinColumn(name = ACCOUNTS)
-    private Set<Account> accounts;
+    @OneToMany(mappedBy = "bankBranch",cascade = CascadeType.ALL)
+    private Set<Account> bankAccounts;
 }
