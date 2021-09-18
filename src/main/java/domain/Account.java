@@ -4,12 +4,8 @@ import base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import util.ApplicationContext;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -52,37 +48,19 @@ public class Account extends BaseEntity<Long> {
     @JoinColumn(name = JOIN_DATE)
     private LocalDateTime joinDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = CREDIT_CARD)
     private CreditCard creditCard;
 
     @JoinColumn(name = IS_ACTIVE)
     private boolean isActive = false;
 
-    public Account(String firstName, String lastName, int nationalCode, LocalDate birthDate,
-                   String fatherName) {
-        accountNumber = accountNumber();
+    public Account(String firstName, String lastName, int nationalCode,
+                   LocalDate birthDate, String fatherName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalCode = nationalCode;
         this.birthDate = birthDate;
         this.fatherName = fatherName;
-        joinDate = LocalDateTime.now();
-        creditCard = new CreditCard();
-    }
-
-    private int accountNumber(){
-        Random random = new Random();
-        while(true){
-            String accountNumber = "";
-            for(int i = 0; i< 10 ; i++){
-                accountNumber += random.nextInt(10);
-            }
-            int accountNo = Integer.parseInt(accountNumber);
-            Account account = ApplicationContext.getAccountRepositoryImpl().existsByAccountNumber(accountNo);
-            if(account == null){
-                return accountNo;
-            }
-        }
     }
 }

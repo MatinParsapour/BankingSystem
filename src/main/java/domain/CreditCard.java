@@ -63,4 +63,20 @@ public class CreditCard extends BaseEntity<Long> {
     @JoinColumn(name = BALANCE)
     private double balance;
 
+    public CreditCard(String bankName, String userSureName,
+                      int cardNumber, int cVV2, LocalDate expirationDate,
+                      int branchCode, int shebaNumber, int firstPassword,
+                      int secondPassword, Account account, double balance) {
+        this.bankName = bankName;
+        this.userSureName = userSureName;
+        this.cardNumber = cardNumber;
+        this.cVV2 = cVV2;
+        this.expirationDate = expirationDate;
+        this.branchCode = branchCode;
+        this.shebaNumber = shebaNumber;
+        this.firstPassword = firstPassword;
+        this.secondPassword = secondPassword;
+        this.account = account;
+        this.balance = balance;
+    }
 }
