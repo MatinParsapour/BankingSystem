@@ -28,6 +28,7 @@ public class Account extends BaseEntity<Long> {
     private static final String ACCOUNT_TYPE = "account_type";
     private static final String JOIN_DATE = "join_date";
     private static final String CREDIT_CARD = "credit_card";
+    private static final String IS_ACTIVE = "is_active";
 
     @JoinColumn(name = FIRST_NAME)
     private String firstName;
@@ -56,4 +57,7 @@ public class Account extends BaseEntity<Long> {
     @OneToOne
     @JoinColumn(name = CREDIT_CARD)
     private CreditCard creditCard;
+
+    @JoinColumn(name = IS_ACTIVE)
+    private boolean isActive = false;
 }
