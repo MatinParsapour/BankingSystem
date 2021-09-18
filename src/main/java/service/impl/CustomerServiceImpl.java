@@ -27,8 +27,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1){
                     enter();
+                    break;
                 }else if(choice == 2){
                     fillTheForm();
+                    break;
                 }else if(choice == 3){
                     break;
                 }else{
@@ -46,7 +48,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 phoneNumber(null),nationalCode(),birthday(),
                 userName(),password());
         createOrUpdate(customer);
-
+        enter();
     }
 
     @Override
@@ -68,13 +70,41 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                         break;
                     }
                 } else {
-                    System.out.println("Welcome");
+                    customerMenu();
                     break;
-//                    mainMenu(user);
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("Invalid entry");
                 System.out.println("Try again");
+            }
+        }
+    }
+
+    @Override
+    public void customerMenu() {
+        while(true){
+            try{
+                ApplicationContext.getDemonstrationMenus().customerMenu();
+                int choice = new Scanner(System.in).nextInt();
+                if(choice == 1){
+                    //TODO create a method for customer to open an account
+                }else if(choice == 2){
+                    //TODO create a method for customer to card to card
+                }else if (choice == 3){
+                    //TODO create a method for customer to see transactions history
+                }else if (choice == 4){
+                    //TODO create a method for customer to see balance of his/her account
+                }else if(choice == 5){
+                    //TODO create a method for customer to close his/her accounts
+                }else if(choice == 6){
+                    //TODO create a method for customer to log out
+                }else if (choice == 7){
+                    break;
+                }else{
+                    System.out.println("Wrong input");
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Wrong input");
             }
         }
     }
