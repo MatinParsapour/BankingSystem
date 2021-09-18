@@ -17,6 +17,6 @@ public class CEO extends User{
 
     private static final String CEO_CODE = "ceo_code";
 
-    @JoinColumn(name = CEO_CODE)
+    @JoinColumn(name = CEO_CODE,unique = true)
     private int cEOCode;
 }

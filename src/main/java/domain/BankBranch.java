@@ -22,14 +22,14 @@ public class BankBranch extends BaseEntity<Long> {
     private static final String ACCOUNTS = "accounts";
 
     @OneToOne
-    @JoinColumn(name = CEO)
+    @JoinColumn(name = CEO,unique = true)
     private CEO cEO;
 
     @OneToMany
     @JoinColumn(name = EMPLOYEES)
     private Set<Employee> employees;
 
-    @JoinColumn(name = BRANCH_CODE)
+    @JoinColumn(name = BRANCH_CODE,unique = true)
     private int branchCode;
 
     @JoinColumn(name = BANK_NAME)
