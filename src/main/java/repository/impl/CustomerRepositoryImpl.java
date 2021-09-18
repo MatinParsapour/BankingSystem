@@ -33,4 +33,22 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer, Long> i
             return null;
         }
     }
+
+    @Override
+    public Customer findUserByUserNameAndPassword(String userName, String password) {
+        try{
+            CriteriaQuery<Customer> criteriaQuery = CriteriaCustom.getCriteriaBuilderCutom().createQuery(Customer.class);
+            Root<Customer> customerRoot = criteriaQuery.from(Customer.class);
+            criteriaQuery.select(customerRoot)
+                    .where(CriteriaCustom.getCriteriaBuilderCutom().and(
+                            CriteriaCustom.getCriteriaBuilderCutom().equal(
+                                    customerRoot.get("userName"), userName),
+                            CriteriaCustom.getCriteriaBuilderCutom().equal(
+                                    customerRoot.get("password"),password)));
+            Customer customer = entityManager.createQuery(criteriaQuery).getSingleResult();
+            return customer;
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
 }

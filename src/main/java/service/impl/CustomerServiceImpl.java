@@ -26,7 +26,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 ApplicationContext.getDemonstrationMenus().customerFirstMenu();
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1){
-                    //TODO create a method for customer to enter
+                    enter();
                 }else if(choice == 2){
                     fillTheForm();
                 }else if(choice == 3){
@@ -47,6 +47,36 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 userName(),password());
         createOrUpdate(customer);
 
+    }
+
+    @Override
+    public void enter() {
+        System.out.println(" enter ");
+        while (true) {
+            try {
+                System.out.print("Username : ");
+                String userName = new Scanner(System.in).nextLine();
+                System.out.print("Password : ");
+                String password = new Scanner(System.in).next();
+                Customer customer = repository.findUserByUserNameAndPassword(userName, password);
+                if (customer == null) {
+                    System.out.println("Username or Password is incorrect\nor maybe you haven't sign up yet");
+                    System.out.println("1.Try again                   2.fill the form");
+                    int choice = new Scanner(System.in).nextInt();
+                    if (choice == 2) {
+                        fillTheForm();
+                        break;
+                    }
+                } else {
+                    System.out.println("Welcome");
+                    break;
+//                    mainMenu(user);
+                }
+            } catch (InputMismatchException exception) {
+                System.out.println("Invalid entry");
+                System.out.println("Try again");
+            }
+        }
     }
 
     private String nationalCode() {

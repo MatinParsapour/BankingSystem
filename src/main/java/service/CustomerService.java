@@ -8,4 +8,6 @@ public interface CustomerService extends BaseService<Customer, Long> {
     void firstMenu();
 
     void fillTheForm();
+
+    void enter();
 }
