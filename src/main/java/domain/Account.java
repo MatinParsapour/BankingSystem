@@ -62,11 +62,12 @@ public class Account extends BaseEntity<Long> {
     private BankBranch bankBranch;
 
     public Account(String firstName, String lastName, int nationalCode,
-                   LocalDate birthDate, String fatherName) {
+                   LocalDate birthDate, String fatherName, BankBranch bankBranch) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalCode = nationalCode;
         this.birthDate = birthDate;
         this.fatherName = fatherName;
+        this.bankBranch = bankBranch;
     }
 }
