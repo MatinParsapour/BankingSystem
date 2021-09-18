@@ -28,6 +28,7 @@ public class CreditCard extends BaseEntity<Long> {
     private static final String SHEBA_NUMBER = "sheba_number";
     private static final String FIRST_PASSWORD = "first_password";
     private static final String SECOND_PASSWORD = "second_password";
+    private static final String BALANCE = "balance";
 
     @JoinColumn(name = BANK_NAME)
     private String bankName;
@@ -58,4 +59,8 @@ public class CreditCard extends BaseEntity<Long> {
 
     @OneToOne(mappedBy = "creditCard")
     private Account account;
+
+    @JoinColumn(name = BALANCE)
+    private double balance;
+
 }
