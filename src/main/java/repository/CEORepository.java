@@ -1,7 +1,7 @@
 package repository;
 
 import base.repository.BaseRepository;
-import domain.Account;
+import domain.CEO;
 
-public interface CEORepository extends BaseRepository<Account,Long> {
+public interface CEORepository extends BaseRepository<CEO, Long> {
 }
