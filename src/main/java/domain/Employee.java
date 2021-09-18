@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import java.time.LocalDate;
 
 @Entity
 @Setter
@@ -23,7 +24,7 @@ public class Employee extends User{
     @JoinColumn(name = IS_EMPLOYEE)
     private boolean isEmployee;
 
-    public Employee(String firstName, String lastName, String email, String phoneNumber, String nationalCode, String birthDate, int employeeCode, boolean isEmployee) {
+    public Employee(String firstName, String lastName, String email, String phoneNumber, String nationalCode, LocalDate birthDate, int employeeCode, boolean isEmployee) {
         super(firstName, lastName, email, phoneNumber, nationalCode, birthDate);
         this.employeeCode = employeeCode;
         this.isEmployee = isEmployee;

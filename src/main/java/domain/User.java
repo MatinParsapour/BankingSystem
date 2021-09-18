@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,13 +42,13 @@ public class User extends BaseEntity<Long> {
     private String nationalCode;
 
     @JoinColumn(name = BIRTH_DATE)
-    private String birthDate;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Account> userAccounts;
 
     public User(String firstName, String lastName, String email, String phoneNumber,
-                String nationalCode, String birthDate) {
+                String nationalCode, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

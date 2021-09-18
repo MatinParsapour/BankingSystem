@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedEntityGraph;
+import java.time.LocalDate;
 
 @Entity
 @Setter
@@ -24,7 +25,7 @@ public class Customer extends User{
     @JoinColumn(name = PASSWORD)
     private String password;
 
-    public Customer(String firstName, String lastName, String email, String phoneNumber, String nationalCode, String birthDate, String userName, String password) {
+    public Customer(String firstName, String lastName, String email, String phoneNumber, String nationalCode, LocalDate birthDate, String userName, String password) {
         super(firstName, lastName, email, phoneNumber, nationalCode, birthDate);
         this.userName = userName;
         this.password = password;

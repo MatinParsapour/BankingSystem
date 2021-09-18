@@ -14,7 +14,7 @@ public class BankingSystem {
                 }else if (choice == 2){
                     //TODO create a method for Employee
                 }else if (choice == 3){
-                    //TODO create a method for Customer
+                    ApplicationContext.getCustomerService().firstMenu();
                 }else if(choice == 4){
                     System.out.println("Hope to see you soon");
                     break;
