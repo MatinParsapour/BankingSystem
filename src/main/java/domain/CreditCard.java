@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -32,7 +33,7 @@ public class CreditCard extends BaseEntity<Long> {
     private String bankName;
 
     @JoinColumn(name = USER_SURE_NAME)
-    private String UserSureName;
+    private String userSureName;
 
     @JoinColumn(name = CARD_NUMBER,unique = true)
     private int cardNumber;
@@ -54,4 +55,7 @@ public class CreditCard extends BaseEntity<Long> {
 
     @JoinColumn(name = SECOND_PASSWORD)
     private int secondPassword;
+
+    @OneToOne(mappedBy = "creditCard")
+    private Account account;
 }
