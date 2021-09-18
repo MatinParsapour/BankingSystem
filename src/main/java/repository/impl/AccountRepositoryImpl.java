@@ -15,4 +15,10 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
     public Class<Account> getEntity() {
         return Account.class;
     }
+
+    @Override
+    public Account existsByAccountNumber(int accountNumber) {
+        return entityManager.createQuery("SELECT a FROM Account a WHERE a.accountNumber =:accountNumber",Account.class).
+                setParameter("accountNumber",accountNumber).getSingleResult();
+    }
 }

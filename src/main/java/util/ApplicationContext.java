@@ -49,6 +49,8 @@ public class ApplicationContext {
         demonstrationMenus = new DemonstrationMenus();
     }
 
+    public static AccountRepository getAccountRepositoryImpl(){return accountRepository;}
+
     public static AccountServiceImpl getAccountService(){return accountService;}
     public static CEOServiceImpl getCEOService(){return cEOService;}
     public static CreditCardServiceImpl getCreditCardService(){return creditCardService;}

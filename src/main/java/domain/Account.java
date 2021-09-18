@@ -4,6 +4,7 @@ import base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import util.ApplicationContext;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Entity
 @Table(name = Account.TABLE_NAME)
@@ -25,7 +27,6 @@ public class Account extends BaseEntity<Long> {
     private static final String BIRTH_DATE = "birth_date";
     private static final String FATHER_NAME = "father_name";
     private static final String ACCOUNT_NUMBER = "account_number";
-    private static final String ACCOUNT_TYPE = "account_type";
     private static final String JOIN_DATE = "join_date";
     private static final String CREDIT_CARD = "credit_card";
     private static final String IS_ACTIVE = "is_active";
@@ -48,9 +49,6 @@ public class Account extends BaseEntity<Long> {
     @JoinColumn(name = ACCOUNT_NUMBER)
     private int accountNumber;
 
-    @JoinColumn(name = ACCOUNT_TYPE)
-    private String accountType;
-
     @JoinColumn(name = JOIN_DATE)
     private LocalDateTime joinDate;
 
@@ -60,4 +58,31 @@ public class Account extends BaseEntity<Long> {
 
     @JoinColumn(name = IS_ACTIVE)
     private boolean isActive = false;
+
+    public Account(String firstName, String lastName, int nationalCode, LocalDate birthDate,
+                   String fatherName) {
+        accountNumber = accountNumber();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationalCode = nationalCode;
+        this.birthDate = birthDate;
+        this.fatherName = fatherName;
+        joinDate = LocalDateTime.now();
+        creditCard = new CreditCard();
+    }
+
+    private int accountNumber(){
+        Random random = new Random();
+        while(true){
+            String accountNumber = "";
+            for(int i = 0; i< 10 ; i++){
+                accountNumber += random.nextInt(10);
+            }
+            int accountNo = Integer.parseInt(accountNumber);
+            Account account = ApplicationContext.getAccountRepositoryImpl().existsByAccountNumber(accountNo);
+            if(account == null){
+                return accountNo;
+            }
+        }
+    }
 }
