@@ -34,7 +34,7 @@ public class CreditCard extends BaseEntity<Long> {
     private String userSureName;
 
     @JoinColumn(name = CARD_NUMBER,unique = true)
-    private int cardNumber;
+    private long cardNumber;
 
     @JoinColumn(name = CVV2)
     private int cVV2;
@@ -46,7 +46,7 @@ public class CreditCard extends BaseEntity<Long> {
     private int branchCode;
 
     @JoinColumn(name = SHEBA_NUMBER,unique = true)
-    private int shebaNumber;
+    private String shebaNumber;
 
     @JoinColumn(name = FIRST_PASSWORD)
     private int firstPassword;
@@ -61,9 +61,8 @@ public class CreditCard extends BaseEntity<Long> {
     private double balance;
 
     public CreditCard(String bankName, String userSureName,
-                      int cardNumber, int cVV2, LocalDate expirationDate,
-                      int branchCode, int shebaNumber, int firstPassword,
-                      int secondPassword, Account account, double balance) {
+                      long cardNumber, int cVV2, LocalDate expirationDate,
+                      int branchCode, String shebaNumber, int firstPassword) {
         this.bankName = bankName;
         this.userSureName = userSureName;
         this.cardNumber = cardNumber;
@@ -72,8 +71,6 @@ public class CreditCard extends BaseEntity<Long> {
         this.branchCode = branchCode;
         this.shebaNumber = shebaNumber;
         this.firstPassword = firstPassword;
-        this.secondPassword = secondPassword;
-        this.account = account;
-        this.balance = balance;
+        balance = 0;
     }
 }

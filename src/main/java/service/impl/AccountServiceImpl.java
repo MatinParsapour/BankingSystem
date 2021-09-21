@@ -9,6 +9,7 @@ import util.ApplicationContext;
 import util.SecurityUser;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRepository> implements AccountService {
@@ -47,5 +48,20 @@ public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRep
                 System.out.println("Wrong input");
             }
         }
+    }
+
+    @Override
+    public List<Account> activeAccount() {
+        return repository.findAccountsForEmployee();
+    }
+
+    @Override
+    public Account checkId(Long id) {
+        return repository.findAccountById(id);
+    }
+
+    @Override
+    public void changeIntoAccount(Account account) {
+        createOrUpdate(account);
     }
 }

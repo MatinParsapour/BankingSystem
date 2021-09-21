@@ -10,4 +10,6 @@ public interface EmployeeService extends BaseService<Employee, Long> {
     void validateEmployee();
 
     void employeeMenu();
+
+    void activeAccount();
 }

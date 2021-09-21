@@ -5,6 +5,8 @@ import domain.CreditCard;
 import repository.CreditCardRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import java.util.InputMismatchException;
 
 public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Long> implements CreditCardRepository {
     public CreditCardRepositoryImpl(EntityManager entityManager) {
@@ -14,5 +16,29 @@ public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Lon
     @Override
     public Class<CreditCard> getEntity() {
         return CreditCard.class;
+    }
+
+    @Override
+    public CreditCard findCreditCardByCardNumber(long cardNumber) {
+        try{
+            return entityManager.createQuery("SELECT c " +
+                    "FROM CreditCard c " +
+                    "WHERE c.cardNumber = :cardNumber ",CreditCard.class).
+                    setParameter("cardNumber",cardNumber).getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public CreditCard findCreditCardByShebaNumber(String shebaNumberString) {
+        try{
+            return entityManager.createQuery("SELECT c " +
+                    "FROM CreditCard c " +
+                    "WHERE c.shebaNumber = :shebaNumber ",CreditCard.class).
+                    setParameter("shebaNumber",shebaNumberString).getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
     }
 }

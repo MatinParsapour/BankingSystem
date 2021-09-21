@@ -1,13 +1,18 @@
 package service.impl;
 
 import base.service.BaseServiceImpl;
+import domain.Account;
+import domain.CreditCard;
 import domain.Employee;
 import repository.EmployeeRepository;
 import service.EmployeeService;
 import util.ApplicationContext;
 import util.SecurityUser;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, EmployeeRepository> implements EmployeeService {
@@ -67,7 +72,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                 ApplicationContext.getDemonstrationMenus().employeeMenu();
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1) {
-                    //TODO create a method for employee to active inactive accounts               }
+                    activeAccount();
                 }else if(choice == 2){
                     break;
                 }else{
@@ -79,5 +84,42 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
         }
     }
 
-
+    @Override
+    public void activeAccount() {
+        while(true){
+            try{
+                List<Account> accounts = ApplicationContext.getAccountService().activeAccount();
+                if(accounts.size() == 0){
+                    System.out.println("You don't have any inactive account");
+                    break;
+                }else {
+                    ApplicationContext.getDemonstrateInfos().printInActiveAccounts(accounts);
+                    System.out.println("If you want to exit enter exit");
+                    System.out.print("Enter id of account : ");
+                    long accountId = new Scanner(System.in).nextLong();
+                    Account account = ApplicationContext.getAccountService().checkId(accountId);
+                    if (account == null) {
+                        System.out.println("This id is incorrect");
+                    } else {
+                        CreditCard creditCard = new CreditCard(account.getBankBranch().getBankName(),
+                                account.getFirstName() + " " + account.getLastName(),
+                                ApplicationContext.getCreditCardService().createCreditCardNumber(),
+                                ApplicationContext.getCreditCardService().createCVV2(),
+                                LocalDate.now().plusYears(5L).minusMonths(5L),
+                                account.getBankBranch().getBranchCode(),
+                                ApplicationContext.getCreditCardService().createShebaNumber(),
+                                ApplicationContext.getCreditCardService().createFirstPassword());
+                        ApplicationContext.getCreditCardService().createCreditCard(creditCard);
+                        account.setActive(true);
+                        account.setCreditCard(creditCard);
+                        account.setJoinDate(LocalDateTime.now());
+                        ApplicationContext.getAccountService().changeIntoAccount(account);
+                        System.out.println("This account successfully activated");
+                    }
+                }
+            }catch (InputMismatchException exception){
+                break;
+            }
+        }
+    }
 }
