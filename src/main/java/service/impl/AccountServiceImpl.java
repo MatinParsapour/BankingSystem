@@ -6,9 +6,8 @@ import domain.BankBranch;
 import repository.AccountRepository;
 import service.AccountService;
 import util.ApplicationContext;
-import util.SecurityCustomer;
+import util.SecurityUser;
 
-import java.security.Security;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,12 +32,12 @@ public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRep
                 }else{
                     System.out.println("Enter your father name : ");
                     String customerFatherName = new Scanner(System.in).nextLine();
-                    Account account = new Account(SecurityCustomer.getCustomer().getFirstName(),
-                            SecurityCustomer.getCustomer().getLastName(),
-                            SecurityCustomer.getCustomer().getNationalCode(),
-                            SecurityCustomer.getCustomer().getBirthDate(),
+                    Account account = new Account(SecurityUser.getCustomer().getFirstName(),
+                            SecurityUser.getCustomer().getLastName(),
+                            SecurityUser.getCustomer().getNationalCode(),
+                            SecurityUser.getCustomer().getBirthDate(),
                             customerFatherName,
-                            bankBranch,SecurityCustomer.getCustomer());
+                            bankBranch, SecurityUser.getCustomer());
                     createOrUpdate(account);
                     System.out.println("Your account's been created");
                     System.out.println("Wait for employee to active your account");

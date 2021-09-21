@@ -5,7 +5,7 @@ import domain.Customer;
 import repository.CustomerRepository;
 import service.CustomerService;
 import util.ApplicationContext;
-import util.SecurityCustomer;
+import util.SecurityUser;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;
@@ -70,7 +70,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                         break;
                     }
                 } else {
-                    SecurityCustomer.setCustomer(customer);
+                    SecurityUser.setCustomer(customer);
                     customerMenu();
                     break;
                 }
