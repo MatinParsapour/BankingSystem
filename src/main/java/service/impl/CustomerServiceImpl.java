@@ -2,11 +2,10 @@ package service.impl;
 
 import base.service.BaseServiceImpl;
 import domain.Customer;
-import domain.User;
 import repository.CustomerRepository;
 import service.CustomerService;
 import util.ApplicationContext;
-import util.Security;
+import util.SecurityCustomer;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;
@@ -71,7 +70,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                         break;
                     }
                 } else {
-                    Security.setCustomer(customer);
+                    SecurityCustomer.setCustomer(customer);
                     customerMenu();
                     break;
                 }
@@ -89,18 +88,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 ApplicationContext.getDemonstrationMenus().customerMenu();
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1){
-                    //TODO create a method for customer to open an account
-                }else if(choice == 2){
-                    //TODO create a method for customer to card to card
-                }else if (choice == 3){
                     //TODO create a method for customer to see transactions history
+                }else if(choice == 2){
+                    ApplicationContext.getAccountService().openAccount();
+                }else if (choice == 3){
+                    //TODO create a method for customers to see status of their account
                 }else if (choice == 4){
-                    //TODO create a method for customer to see balance of his/her account
-                }else if(choice == 5){
                     //TODO create a method for customer to close his/her accounts
+                }else if(choice == 5){
+                    //TODO create a method for customer to card to card
                 }else if(choice == 6){
-                    //TODO create a method for customer to log out
+                    //TODO create a method for customer to see balance of his/her account
                 }else if (choice == 7){
+                    //TODO create a method for customer to log out
+                }else if(choice == 8){
                     break;
                 }else{
                     System.out.println("Wrong input");

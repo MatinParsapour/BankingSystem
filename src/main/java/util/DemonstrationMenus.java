@@ -20,14 +20,23 @@ public class DemonstrationMenus {
 
     public void customerMenu(){
         System.out.println("+-------------------------+");
-        System.out.println("|    1.Open an account    |");
-        System.out.println("|     2.Card to card      |");
-        System.out.println("|  3.Transactions history |");
-        System.out.println("|         4.Balance       |");
-        System.out.println("|      5.Close account    |");
-        System.out.println("|         6.Log out       |");
-        System.out.println("|          7.Exit         |");
+        System.out.println("|  1.Transactions history |");
+        System.out.println("|    2.Open an account    |");
+        System.out.println("|      3.Your accounts    |");
+        System.out.println("|      4.Close account    |");
+        System.out.println("|      5.Card to card     |");
+        System.out.println("|       6.Balance         |");
+        System.out.println("|       7.Log out         |");
+        System.out.println("|        8.Exit           |");
         System.out.println("+-------------------------+");
 
+    }
+
+    public void openAccountMenu(){
+        System.out.println("+-----------------------------+");
+        System.out.println("|   Shahr   |    Keshavarzi   |");
+        System.out.println("|   Mellat     |     Meli     |");
+        System.out.println("+-----------------------------+");
+        System.out.print("Enter name of bank you want : ");
     }
 }

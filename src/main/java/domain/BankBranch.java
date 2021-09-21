@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = BankBranch.TABLE_NAME)
@@ -37,4 +38,12 @@ public class BankBranch extends BaseEntity<Long> {
 
     @OneToMany(mappedBy = "bankBranch",cascade = CascadeType.ALL)
     private Set<Account> bankAccounts;
+
+    public BankBranch(domain.CEO cEO, int branchCode, String bankName) {
+        this.cEO = cEO;
+        employees = new TreeSet<>();
+        this.branchCode = branchCode;
+        this.bankName = bankName;
+        bankAccounts = new TreeSet<>();
+    }
 }

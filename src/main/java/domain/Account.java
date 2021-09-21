@@ -34,7 +34,7 @@ public class Account extends BaseEntity<Long> {
     private String lastName;
 
     @JoinColumn(name = NATIONAL_CODE,unique = true)
-    private int nationalCode;
+    private String nationalCode;
 
     @JoinColumn(name = BIRTH_DATE)
     private LocalDate birthDate;
@@ -61,13 +61,14 @@ public class Account extends BaseEntity<Long> {
     @ManyToOne(cascade = CascadeType.ALL)
     private BankBranch bankBranch;
 
-    public Account(String firstName, String lastName, int nationalCode,
-                   LocalDate birthDate, String fatherName, BankBranch bankBranch) {
+    public Account(String firstName, String lastName, String nationalCode,
+                   LocalDate birthDate, String fatherName, BankBranch bankBranch, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalCode = nationalCode;
         this.birthDate = birthDate;
         this.fatherName = fatherName;
         this.bankBranch = bankBranch;
+        this.user = user;
     }
 }

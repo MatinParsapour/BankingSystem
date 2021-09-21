@@ -2,7 +2,7 @@ package util;
 
 import domain.Customer;
 
-public class Security {
+public class SecurityCustomer {
     
     private static Customer customer;
 
@@ -11,6 +11,6 @@ public class Security {
     }
 
     public static void setCustomer(Customer customer) {
-        Security.customer = customer;
+        SecurityCustomer.customer = customer;
     }
 }
