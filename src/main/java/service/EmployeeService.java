@@ -8,4 +8,6 @@ public interface EmployeeService extends BaseService<Employee, Long> {
     void firstMenu();
 
     void validateEmployee();
+
+    void employeeMenu();
 }

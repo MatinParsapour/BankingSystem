@@ -38,4 +38,11 @@ public class DemonstrationMenus {
         System.out.println("|        2.َApplication        |");
         System.out.println("+-----------------------------+");
     }
+
+    public void employeeMenu(){
+        System.out.println("+-----------------------------+");
+        System.out.println("|     1.Active an account     |");
+        System.out.println("|          2.َExit             |");
+        System.out.println("+-----------------------------+");
+    }
 }

@@ -5,6 +5,7 @@ import domain.Employee;
 import repository.EmployeeRepository;
 import service.EmployeeService;
 import util.ApplicationContext;
+import util.SecurityUser;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -50,7 +51,27 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                     }
                 }else{
                     System.out.println("Welcome : " + employee.getFirstName() + " " + employee.getLastName());
-                    //TODO create a method for employee to do his tasks
+                    SecurityUser.setEmployee(employee);
+                    employeeMenu();
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Wrong input");
+            }
+        }
+    }
+
+    @Override
+    public void employeeMenu() {
+        while(true){
+            try{
+                ApplicationContext.getDemonstrationMenus().employeeMenu();
+                int choice = new Scanner(System.in).nextInt();
+                if(choice == 1) {
+                    //TODO create a method for employee to active inactive accounts               }
+                }else if(choice == 2){
+                    break;
+                }else{
+                    System.out.println("Wrong input");
                 }
             }catch (InputMismatchException exception){
                 System.out.println("Wrong input");
