@@ -58,6 +58,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                     System.out.println("Welcome : " + employee.getFirstName() + " " + employee.getLastName());
                     SecurityUser.setEmployee(employee);
                     employeeMenu();
+                    break;
                 }
             }catch (InputMismatchException exception){
                 System.out.println("Wrong input");
