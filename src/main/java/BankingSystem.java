@@ -12,7 +12,7 @@ public class BankingSystem {
                 if(choice == 1){
                     //TODO create a method for CEO
                 }else if (choice == 2){
-                    //TODO create a method for Employee
+                    ApplicationContext.getEmployeeService().firstMenu();
                 }else if (choice == 3){
                     ApplicationContext.getCustomerService().firstMenu();
                 }else if(choice == 4){

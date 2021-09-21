@@ -32,11 +32,10 @@ public class DemonstrationMenus {
 
     }
 
-    public void openAccountMenu(){
+    public void employeeFirstMenu(){
         System.out.println("+-----------------------------+");
-        System.out.println("|   Shahr   |    Keshavarzi   |");
-        System.out.println("|   Mellat     |     Meli     |");
+        System.out.println("|          1.Enter            |");
+        System.out.println("|        2.َApplication        |");
         System.out.println("+-----------------------------+");
-        System.out.print("Enter name of bank you want : ");
     }
 }

@@ -18,7 +18,7 @@ public class Employee extends User{
     private static final String EMPLOYEE_CODE = "employee_code";
     private static final String IS_EMPLOYEE = "is_employee";
 
-    @JoinColumn(name = EMPLOYEE_CODE)
+    @JoinColumn(name = EMPLOYEE_CODE,unique = true)
     private int employeeCode;
 
     @JoinColumn(name = IS_EMPLOYEE)
