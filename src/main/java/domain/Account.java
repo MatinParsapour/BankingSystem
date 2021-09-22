@@ -61,6 +61,8 @@ public class Account extends BaseEntity<Long> {
     @ManyToOne(cascade = CascadeType.ALL)
     private BankBranch bankBranch;
 
+    private boolean isBlocked = false;
+
     public Account(String firstName, String lastName, String nationalCode,
                    LocalDate birthDate, String fatherName, BankBranch bankBranch, User user) {
         this.firstName = firstName;

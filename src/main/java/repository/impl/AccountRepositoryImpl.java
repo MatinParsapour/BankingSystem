@@ -23,7 +23,7 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
 
     @Override
     public Account existsByAccountNumber(int accountNumber) {
-        return entityManager.createQuery("SELECT a FROM Account a WHERE a.accountNumber =:accountNumber",Account.class).
+        return entityManager.createQuery("SELECT a FROM Account a WHERE a.accountNumber =:accountNumber AND a.isBlocked = false ",Account.class).
                 setParameter("accountNumber",accountNumber).getSingleResult();
     }
 
@@ -34,6 +34,7 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
                     "FROM Account a " +
                     "JOIN a.bankBranch b " +
                     "WHERE b.id = :id " +
+                    "AND a.isBlocked = false " +
                     "AND a.isActive = false",Account.class)
                     .setParameter("id", SecurityUser.getEmployee().getBankBranch().getId())
                     .getResultList();
@@ -49,6 +50,7 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
                     "FROM Account a " +
                     "JOIN a.bankBranch b " +
                     "WHERE a.id = :id " +
+                    "AND a.isBlocked = false " +
                     "AND b.id = :bankId",Account.class).setParameter("id",id).
                     setParameter("bankId",SecurityUser.getEmployee().getBankBranch().getId())
                     .getSingleResult();
@@ -62,7 +64,8 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
         try{
             return entityManager.createQuery("SELECT a " +
                     "FROM Account a " +
-                    "WHERE a.user = :user ",Account.class).setParameter("user",SecurityUser.getCustomer()).getResultList();
+                    "WHERE a.user = :user " +
+                    "AND a.isBlocked = false",Account.class).setParameter("user",SecurityUser.getCustomer()).getResultList();
         }catch (NoResultException exception){
             return null;
         }
@@ -73,7 +76,8 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
         try{
             return entityManager.createQuery("SELECT a " +
                     "FROM Account a " +
-                    "WHERE a.accountNumber = :accountNumber ", Account.class).
+                    "WHERE a.accountNumber = :accountNumber " +
+                    "AND a.isBlocked = false", Account.class).
                     setParameter("accountNumber",accountNumber).getSingleResult();
         }catch (NoResultException exception){
             return null;

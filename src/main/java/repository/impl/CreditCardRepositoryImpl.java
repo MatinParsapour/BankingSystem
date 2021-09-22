@@ -24,7 +24,9 @@ public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Lon
         try{
             return entityManager.createQuery("SELECT c " +
                     "FROM CreditCard c " +
-                    "WHERE c.cardNumber = :cardNumber ",CreditCard.class).
+                    "JOIN c.account a " +
+                    "WHERE c.cardNumber = :cardNumber " +
+                    "AND a.isBlocked = false ",CreditCard.class).
                     setParameter("cardNumber",cardNumber).getSingleResult();
         }catch (NoResultException exception){
             return null;
@@ -36,7 +38,9 @@ public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Lon
         try{
             return entityManager.createQuery("SELECT c " +
                     "FROM CreditCard c " +
-                    "WHERE c.shebaNumber = :shebaNumber ",CreditCard.class).
+                    "JOIN c.account a " +
+                    "WHERE c.shebaNumber = :shebaNumber " +
+                    "AND a.isBlocked = false ",CreditCard.class).
                     setParameter("shebaNumber",shebaNumberString).getSingleResult();
         }catch (NoResultException exception){
             return null;
@@ -51,7 +55,8 @@ public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Lon
                     "JOIN c.account a " +
                     "JOIN a.user u " +
                     "WHERE c.id = :id " +
-                    "AND u.id = :userId ",CreditCard.class).
+                    "AND u.id = :userId " +
+                    "AND a.isBlocked = false ",CreditCard.class).
                     setParameter("id",id).setParameter("userId", SecurityUser.getCustomer().getId()).getSingleResult();
         }catch (NoResultException exception){
             return null;
