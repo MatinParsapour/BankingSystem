@@ -100,7 +100,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 }else if(choice == 6){
                     //TODO create a method for customer to see balance of his/her account
                 }else if (choice == 7){
-                    //TODO create a method for customer to log out
+                    int nextMove = logOut();
+                    if(nextMove == 1){
+                        break;
+                    }
                 }else if(choice == 8){
                     break;
                 }else{
@@ -377,6 +380,27 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
             } catch (InputMismatchException exception) {
                 System.out.println("You should enter number");
                 System.out.println("Try again");
+            }
+        }
+    }
+
+    @Override
+    public int logOut() {
+        while(true){
+            try{
+                System.out.println("Are you sure");
+                System.out.println("1.Yes   2.NO");
+                int choice = new Scanner(System.in).nextInt();
+                if(choice == 1){
+                    delete(SecurityUser.getCustomer());
+                    return 1;
+                }else if(choice == 2){
+                    return 2;
+                }else{
+                    System.out.println("Choose between options");
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Invalid entry");
             }
         }
     }

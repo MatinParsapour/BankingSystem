@@ -12,4 +12,6 @@ public interface CustomerService extends BaseService<Customer, Long> {
     void enter();
 
     void customerMenu();
+
+    int logOut();
 }
