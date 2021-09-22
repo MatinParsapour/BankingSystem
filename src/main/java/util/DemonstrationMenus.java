@@ -22,7 +22,7 @@ public class DemonstrationMenus {
         System.out.println("+-------------------------+");
         System.out.println("|  1.Transactions history |");
         System.out.println("|    2.Open an account    |");
-        System.out.println("|      3.Your accounts    |");
+        System.out.println("|      3.Your cards       |");
         System.out.println("|       4.Log out         |");
         System.out.println("|        5.Exit           |");
         System.out.println("+-------------------------+");

@@ -43,7 +43,7 @@ public class Account extends BaseEntity<Long> {
     private String fatherName;
 
     @JoinColumn(name = ACCOUNT_NUMBER)
-    private int accountNumber;
+    private long accountNumber;
 
     @JoinColumn(name = JOIN_DATE)
     private LocalDateTime joinDate;

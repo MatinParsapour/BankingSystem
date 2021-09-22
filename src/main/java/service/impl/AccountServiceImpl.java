@@ -3,6 +3,7 @@ package service.impl;
 import base.service.BaseServiceImpl;
 import domain.Account;
 import domain.BankBranch;
+import domain.CreditCard;
 import repository.AccountRepository;
 import service.AccountService;
 import util.ApplicationContext;
@@ -10,6 +11,7 @@ import util.SecurityUser;
 
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRepository> implements AccountService {
@@ -63,5 +65,28 @@ public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRep
     @Override
     public void changeIntoAccount(Account account) {
         createOrUpdate(account);
+    }
+
+    @Override
+    public List<Account> findCustomerAccounts() {
+        return repository.findCustomerAccounts();
+    }
+
+    @Override
+    public long createAccountNumber() {
+        Random random = new Random();
+        String accountNumberString ="";
+        long accountNumber = 0;
+        while(true){
+            accountNumberString = "";
+            for(int i = 0 ; i<= 10; i++){
+                accountNumberString += random.nextInt(9);
+            }
+            accountNumber = Long.parseLong(accountNumberString);
+            Account account = repository.findAccountByAccountNumber(accountNumber);
+            if(account == null){
+                return accountNumber;
+            }
+        }
     }
 }

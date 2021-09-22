@@ -2,6 +2,7 @@ package repository.impl;
 
 import base.repository.BaseRepositoryImpl;
 import domain.Account;
+import domain.CreditCard;
 import repository.AccountRepository;
 import util.SecurityUser;
 
@@ -52,6 +53,29 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
                     setParameter("bankId",SecurityUser.getEmployee().getBankBranch().getId())
                     .getSingleResult();
         }catch (InputMismatchException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Account> findCustomerAccounts() {
+        try{
+            return entityManager.createQuery("SELECT a " +
+                    "FROM Account a " +
+                    "WHERE a.user = :user ",Account.class).setParameter("user",SecurityUser.getCustomer()).getResultList();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public Account findAccountByAccountNumber(long accountNumber) {
+        try{
+            return entityManager.createQuery("SELECT a " +
+                    "FROM Account a " +
+                    "WHERE a.accountNumber = :accountNumber ", Account.class).
+                    setParameter("accountNumber",accountNumber).getSingleResult();
+        }catch (NoResultException exception){
             return null;
         }
     }

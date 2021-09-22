@@ -70,28 +70,14 @@ public class DemonstrateInfos {
         }
         int cover = idSize + birthDaySize + firstNameSize + lastNameSize + natinalCodeSize + fatherNameSize + 42;
 
-        System.out.print("+");
-        for(int i = 0 ; i < cover ; i++){
-            System.out.print("-");
-        }
-        System.out.println("+");
+        printHeaderOfInActiveAccounts(idSize, birthDaySize, firstNameSize, lastNameSize, natinalCodeSize, fatherNameSize, cover);
 
-        System.out.format("| %" + (-(idSize)) + "s" ,"id");
-        System.out.format("| %" + (-(firstNameSize + 8)) + "s" ,"firstname");
-        System.out.format("| %" + (-(lastNameSize + 4)) + "s" ,"lastname");
-        System.out.format("| %" + (-(fatherNameSize + 9)) + "s" ,"fathername");
-        System.out.format("| %" + (-(birthDaySize + 4)) + "s" ,"birthday");
-        System.out.format("| %" + (-(natinalCodeSize + 6)) + "s|\n" ,"nationalcode");
+        printInformationOfActiveAccounts(activeAccount, idSize, birthDaySize, firstNameSize, lastNameSize, natinalCodeSize, fatherNameSize, cover);
+    }
 
-
-        System.out.print("+");
-        for(int i = 0 ; i < cover ; i++){
-            System.out.print("-");
-        }
-        System.out.println("+");
-
+    private void printInformationOfActiveAccounts(List<Account> activeAccount, int idSize, int birthDaySize, int firstNameSize, int lastNameSize, int natinalCodeSize, int fatherNameSize, int cover) {
         for(Account account : activeAccount){
-            System.out.format("| %" + (-(idSize)) + "s" ,account.getId());
+            System.out.format("| %" + (-idSize) + "s" ,account.getId());
             System.out.format("| %" + (-(firstNameSize + 8)) + "s" ,account.getFirstName());
             System.out.format("| %" + (-(lastNameSize + 4)) + "s" ,account.getLastName());
             System.out.format("| %" + (-(fatherNameSize + 9)) + "s" ,account.getFatherName());
@@ -101,9 +87,97 @@ public class DemonstrateInfos {
 
 
         System.out.print("+");
+        for(int i = 0; i < cover; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+    }
+
+    private void printHeaderOfInActiveAccounts(int idSize, int birthDaySize, int firstNameSize, int lastNameSize, int natinalCodeSize, int fatherNameSize, int cover) {
+        System.out.print("+");
+        for(int i = 0; i < cover; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+
+        System.out.format("| %" + (-idSize) + "s" ,"id");
+        System.out.format("| %" + (-(firstNameSize + 8)) + "s" ,"firstname");
+        System.out.format("| %" + (-(lastNameSize + 4)) + "s" ,"lastname");
+        System.out.format("| %" + (-(fatherNameSize + 9)) + "s" ,"fathername");
+        System.out.format("| %" + (-(birthDaySize + 4)) + "s" ,"birthday");
+        System.out.format("| %" + (-(natinalCodeSize + 6)) + "s|\n" ,"nationalcode");
+
+
+        System.out.print("+");
+        for(int i = 0; i < cover; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+    }
+
+    public void printUserAccounts(List<Account> accounts){
+        int idSize = 5;
+        int cardNumberSize = 16;
+        int bankNameSize = 0;
+        int bankCodeSize = 4;
+        int cVV2Size = 4;
+        int expirationDateSize = 10;
+        int accountNumberSize = 9;
+        int firstPasswordSize = 4;
+        int secondPasswordSize = 6;
+        int balanceSize = 10;
+
+        for(Account account : accounts){
+            if(account.getBankBranch().getBankName().length() > balanceSize){
+                bankNameSize = account.getBankBranch().getBankName().length();
+            }
+        }
+
+        int cover = idSize + cardNumberSize + bankNameSize + bankCodeSize + cVV2Size + expirationDateSize + accountNumberSize + firstPasswordSize + secondPasswordSize + balanceSize + 99;
+
+        System.out.print("+");
+        for(int i = 0 ; i < cover ; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+
+        System.out.format("| %" + (-(idSize + 5)) + "s" , "id");
+        System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , "cardnumber");
+        System.out.format("| %" + (-(bankNameSize + 15)) + "s" , "bankname");
+        System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , "brankcode");
+        System.out.format("| %" + (-(cVV2Size + 5)) + "s" , "cvv2");
+        System.out.format("| %" + (-(expirationDateSize + 5)) + "s" , "expirationdate");
+        System.out.format("| %" + (-(accountNumberSize + 15)) + "s" , "accountnumber");
+        System.out.format("| %" + (-(firstPasswordSize + 10)) + "s" , "firstpassword");
+        System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , "secondpassword");
+        System.out.format("| %" + (-(balanceSize + 5)) + "s| \n" , "balance");
+
+
+        System.out.print("+");
+        for(int i = 0 ; i < cover ; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+
+        for(Account account : accounts){
+            System.out.format("| %" + (-(idSize + 5)) + "s" , account.getId());
+            System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , account.getCreditCard().getCardNumber());
+            System.out.format("| %" + (-(bankNameSize + 15)) + "s" , account.getBankBranch().getBankName());
+            System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , account.getBankBranch().getBranchCode());
+            System.out.format("| %" + (-(cVV2Size + 5)) + "s" , account.getCreditCard().getCVV2());
+            System.out.format("| %" + (-(expirationDateSize + 5)) + "s" , account.getCreditCard().getExpirationDate());
+            System.out.format("| %" + (-(accountNumberSize + 15)) + "s" , account.getAccountNumber());
+            System.out.format("| %" + (-(firstPasswordSize + 10)) + "s" , account.getCreditCard().getFirstPassword());
+            System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , account.getCreditCard().getSecondPassword());
+            System.out.format("| %" + (-(balanceSize + 5)) + "s|\n" , account.getCreditCard().getBalance());
+        }
+
+
+        System.out.print("+");
         for(int i = 0 ; i < cover ; i++){
             System.out.print("-");
         }
         System.out.println("+");
     }
+
 }

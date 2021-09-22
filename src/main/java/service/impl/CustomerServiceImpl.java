@@ -1,6 +1,7 @@
 package service.impl;
 
 import base.service.BaseServiceImpl;
+import domain.Account;
 import domain.Customer;
 import repository.CustomerRepository;
 import service.CustomerService;
@@ -9,6 +10,7 @@ import util.SecurityUser;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -92,7 +94,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 }else if(choice == 2){
                     ApplicationContext.getAccountService().openAccount();
                 }else if (choice == 3){
-                    //TODO create a method for customers to see status of their account
+                    yourCards();
                 }else if (choice == 4){
                     int nextMove = logOut();
                     if(nextMove == 1){
@@ -395,6 +397,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 }
             }catch (InputMismatchException exception){
                 System.out.println("Invalid entry");
+            }
+        }
+    }
+
+    @Override
+    public void yourCards() {
+        while(true){
+            List<Account> accounts = ApplicationContext.getAccountRepositoryImpl().findCustomerAccounts();
+            if(accounts.size() == 0){
+                System.out.println("You don't have any account yet");
+                break;
+            }else{
+                ApplicationContext.getDemonstrateInfos().printUserAccounts(accounts);
+                break;
             }
         }
     }

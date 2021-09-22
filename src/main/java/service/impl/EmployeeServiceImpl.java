@@ -114,6 +114,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                         account.setActive(true);
                         account.setCreditCard(creditCard);
                         account.setJoinDate(LocalDateTime.now());
+                        account.setAccountNumber(ApplicationContext.getAccountService().createAccountNumber());
                         ApplicationContext.getAccountService().changeIntoAccount(account);
                         System.out.println("This account successfully activated");
                     }

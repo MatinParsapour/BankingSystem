@@ -14,4 +14,8 @@ public interface AccountService extends BaseService<Account,Long> {
     Account checkId(Long id);
 
     void changeIntoAccount(Account account);
+
+    List<Account> findCustomerAccounts();
+
+    long createAccountNumber();
 }
