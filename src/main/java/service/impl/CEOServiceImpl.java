@@ -4,6 +4,7 @@ import base.service.BaseServiceImpl;
 import domain.CEO;
 import repository.CEORepository;
 import service.CEOService;
+import util.ApplicationContext;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,6 +31,20 @@ public class CEOServiceImpl extends BaseServiceImpl<CEO,Long, CEORepository> imp
     }
 
     private void mainMenu() {
-
+        while(true){
+            try{
+                ApplicationContext.getDemonstrationMenus().cEOMainMenu();
+                int choice = new Scanner(System.in).nextInt();
+                if(choice == 1){
+                    //TODO create a method for ceo to see requests
+                }else if(choice == 2){
+                    break;
+                }else{
+                    System.out.println("Wrong input");
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Wrong input");
+            }
+        }
     }
 }

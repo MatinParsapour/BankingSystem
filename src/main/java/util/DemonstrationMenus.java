@@ -54,4 +54,11 @@ public class DemonstrationMenus {
         System.out.println("|                 5.Exit                 |");
         System.out.println("+----------------------------------------+");
     }
+
+    public void cEOMainMenu(){
+        System.out.println("+------------------------------------+");
+        System.out.println("|           1.requests               |");
+        System.out.println("|             2.Exit                 |");
+        System.out.println("+------------------------------------+");
+    }
 }
