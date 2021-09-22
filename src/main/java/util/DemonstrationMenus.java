@@ -42,4 +42,14 @@ public class DemonstrationMenus {
         System.out.println("|          2.َExit             |");
         System.out.println("+-----------------------------+");
     }
+
+    public void customerCardsMenu(){
+        System.out.println("+----------------------------------------+");
+        System.out.println("|             1.Card to card             |");
+        System.out.println("|            2.Close account             |");
+        System.out.println("|        3.change first password         |");
+        System.out.println("|     4.change or set second password    |");
+        System.out.println("|                 5.Exit                 |");
+        System.out.println("+----------------------------------------+");
+    }
 }

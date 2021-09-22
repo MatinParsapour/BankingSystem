@@ -409,8 +409,26 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 System.out.println("You don't have any account yet");
                 break;
             }else{
-                ApplicationContext.getDemonstrateInfos().printUserAccounts(accounts);
-                break;
+                try{
+                    ApplicationContext.getDemonstrateInfos().printUserAccounts(accounts);
+                    ApplicationContext.getDemonstrationMenus().customerCardsMenu();
+                    int choice = new Scanner(System.in).nextInt();
+                    if(choice == 1){
+                        //TODO create a method for customer to card to card
+                    }else if (choice == 2){
+                        //TODO create a method for customer to close his/her account
+                    }else if (choice == 3){
+                        //TODO create a method for customer to change his/her first password;
+                    }else if (choice == 4){
+                        //TODO create a method for customer to change or set his/her second password
+                    }else if(choice == 5){
+                        break;
+                    }else{
+                        System.out.println("Wrong input");
+                    }
+                }catch (InputMismatchException exception){
+                    System.out.println("Wrong input");
+                }
             }
         }
     }
