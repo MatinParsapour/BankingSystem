@@ -10,7 +10,7 @@ public class BankingSystem {
                 ApplicationContext.getDemonstrationMenus().mainMenu();
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1){
-                    //TODO create a method for CEO
+                    ApplicationContext.getCEOService().firstMenu();
                 }else if (choice == 2){
                     ApplicationContext.getEmployeeService().firstMenu();
                 }else if (choice == 3){

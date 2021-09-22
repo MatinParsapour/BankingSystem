@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +21,9 @@ public class CEO extends User{
 
     @JoinColumn(name = CEO_CODE,unique = true)
     private int cEOCode;
+
+    @OneToOne(mappedBy = "cEO")
+    private BankBranch bankBranch;
 
     public CEO(String firstName, String lastName, String email, String phoneNumber, String nationalCode, LocalDate birthDate, int cEOCode) {
         super(firstName, lastName, email, phoneNumber, nationalCode, birthDate);

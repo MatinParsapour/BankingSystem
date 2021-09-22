@@ -61,4 +61,10 @@ public class DemonstrationMenus {
         System.out.println("|             2.Exit                 |");
         System.out.println("+------------------------------------+");
     }
+
+    public void requestMenu(){
+        System.out.println("+-----------------------------------------------+");
+        System.out.println("|1.Accept                               2.Reject|");
+        System.out.println("+-----------------------------------------------+");
+    }
 }

@@ -1,10 +1,7 @@
 package service.impl;
 
 import base.service.BaseServiceImpl;
-import domain.Account;
-import domain.CreditCard;
-import domain.Customer;
-import domain.Employee;
+import domain.*;
 import repository.EmployeeRepository;
 import service.EmployeeService;
 import util.ApplicationContext;
@@ -56,23 +53,29 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
         Employee employee = repository.findEmployeeByNationalCode(nationalCode);
         if(employee.getIsEmployee() == null){
             System.out.println("In progress");
-        }else if(employee.getIsEmployee() == false){
+        }else if(!employee.getIsEmployee()){
             System.out.println("You rejected");
         }else{
-            System.out.println("You're an employee");
+            System.out.println("You're an employee your code is : " + employee.getEmployeeCode());
         }
     }
 
     private void Application() {
-        Employee employee = new Employee();
-        employee.setFirstName(firstName());
-        employee.setLastName(lastName());
-        employee.setEmail(email(null));
-        employee.setPhoneNumber(phoneNumber(null));
-        employee.setNationalCode(nationalCode());
-        employee.setBirthDate(birthday());
-        employee.setIsEmployee(null);
-        createOrUpdate(employee);
+        BankBranch bankBranch = ApplicationContext.getBankBranchService().chooseBank();
+        if(bankBranch == null){
+            System.out.println("There's no such bank");
+        }else{
+            Employee employee = new Employee();
+            employee.setFirstName(firstName());
+            employee.setLastName(lastName());
+            employee.setEmail(email(null));
+            employee.setPhoneNumber(phoneNumber(null));
+            employee.setNationalCode(nationalCode());
+            employee.setBirthDate(birthday());
+            employee.setIsEmployee(null);
+            employee.setBankBranch(bankBranch);
+            createOrUpdate(employee);
+        }
     }
 
     @Override
@@ -80,7 +83,7 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
         while(true){
             try{
                 System.out.println("Enter your employee id : ");
-                int employeeCode = new Scanner(System.in).nextInt();
+                long employeeCode = new Scanner(System.in).nextLong();
                 Employee employee = repository.findEmployeeByEmployeeCode(employeeCode);
                 if(employee == null){
                     System.out.println("This code is wrong");
@@ -156,6 +159,31 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                 }
             }catch (InputMismatchException exception){
                 break;
+            }
+        }
+    }
+
+    @Override
+    public List<Employee> requests() {
+        return repository.findRequestsForCEO();
+    }
+
+    public Employee returnEmployee(long id){
+        return repository.findEmployeeByIdForCEO(id);
+    }
+
+    public long generateEmployeeCode(){
+        Random random = new Random();
+        String employeeCodeString = "";
+        while(true){
+            employeeCodeString = "";
+            for(int i = 0; i<10; i++){
+                employeeCodeString += random.nextInt(9);
+            }
+            long employeeCode = Long.parseLong(employeeCodeString);
+            Employee employee = repository.findEmployeeByEmployeeCode(employeeCode);
+            if(employee == null){
+                return employeeCode;
             }
         }
     }

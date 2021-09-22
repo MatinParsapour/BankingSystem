@@ -21,7 +21,7 @@ public class Employee extends User{
     private static final String IS_EMPLOYEE = "is_employee";
 
     @JoinColumn(name = EMPLOYEE_CODE,unique = true)
-    private int employeeCode;
+    private long employeeCode;
 
     @JoinColumn(name = IS_EMPLOYEE)
     private Boolean isEmployee;
