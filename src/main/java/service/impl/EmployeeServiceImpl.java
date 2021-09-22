@@ -173,12 +173,17 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                     nationalCode = new Scanner(System.in).next();
                     matcher = pattern.matcher(nationalCode);
                 }
-                System.out.println("1.Acceptable         2.Unacceptable");
-                int choice = new Scanner(System.in).nextInt();
-                if (choice == 1) {
-                    return nationalCode;
-                } else {
-                    System.out.println("Now try again");
+                Employee employee = repository.findEmployeeByNationalCode(nationalCode);
+                if(employee == null){
+                    System.out.println("1.Acceptable         2.Unacceptable");
+                    int choice = new Scanner(System.in).nextInt();
+                    if (choice == 1) {
+                        return nationalCode;
+                    } else {
+                        System.out.println("Now try again");
+                    }
+                }else{
+                    System.out.println("There's no way two person have same national code");
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("You should enter number");
