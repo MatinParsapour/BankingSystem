@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = CreditCard.TABLE_NAME)
@@ -59,6 +60,9 @@ public class CreditCard extends BaseEntity<Long> {
 
     @JoinColumn(name = BALANCE)
     private double balance;
+
+    @OneToMany(mappedBy = "creditCards")
+    private List<Transaction> transactionList;
 
     public CreditCard(String bankName, String userSureName,
                       long cardNumber, int cVV2, LocalDate expirationDate,

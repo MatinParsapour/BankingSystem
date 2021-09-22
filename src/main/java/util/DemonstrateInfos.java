@@ -2,6 +2,7 @@ package util;
 
 import domain.Account;
 import domain.BankBranch;
+import domain.Transaction;
 
 import java.util.List;
 
@@ -135,8 +136,37 @@ public class DemonstrateInfos {
 
         int cover = idSize + cardNumberSize + bankNameSize + bankCodeSize + cVV2Size + expirationDateSize + accountNumberSize + firstPasswordSize + secondPasswordSize + balanceSize + 99;
 
+
+        printUserAccountsHeader(idSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover);
+
+        printUserAccountsFooter(accounts, idSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover);
+    }
+
+    private void printUserAccountsFooter(List<Account> accounts, int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover) {
+        for(Account account : accounts){
+            System.out.format("| %" + (-(idSize + 5)) + "s" , account.getCreditCard().getId());
+            System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , account.getCreditCard().getCardNumber());
+            System.out.format("| %" + (-(bankNameSize + 15)) + "s" , account.getBankBranch().getBankName());
+            System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , account.getBankBranch().getBranchCode());
+            System.out.format("| %" + (-(cVV2Size + 5)) + "s" , account.getCreditCard().getCVV2());
+            System.out.format("| %" + (-(expirationDateSize + 5)) + "s" , account.getCreditCard().getExpirationDate());
+            System.out.format("| %" + (-(accountNumberSize + 15)) + "s" , account.getAccountNumber());
+            System.out.format("| %" + (-(firstPasswordSize + 10)) + "s" , account.getCreditCard().getFirstPassword());
+            System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , account.getCreditCard().getSecondPassword());
+            System.out.format("| %" + (-(balanceSize + 5)) + "s|\n" , account.getCreditCard().getBalance());
+        }
+
+
         System.out.print("+");
-        for(int i = 0 ; i < cover ; i++){
+        for(int i = 0; i < cover; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+    }
+
+    private void printUserAccountsHeader(int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover) {
+        System.out.print("+");
+        for(int i = 0; i < cover; i++){
             System.out.print("-");
         }
         System.out.println("+");
@@ -154,24 +184,65 @@ public class DemonstrateInfos {
 
 
         System.out.print("+");
+        for(int i = 0; i < cover; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+    }
+
+    public void printTransactionsHistory(List<Transaction> transactions){
+        int bankNameSize = 0;
+        int sourceCardNumberSize =16;
+        int destinationCardNumberSize = 16;
+        int amountSize = 0;
+        int dateSize = 26;
+        int balanceSize = 0;
+        int trackingNoSize = 8;
+        int referenceNoSize = 14;
+        for(Transaction transaction : transactions){
+            if (transaction.getBankName().length() > bankNameSize) {
+                bankNameSize = transaction.getBankName().length();
+            }
+            if(String.valueOf(transaction.getAmount()).length() > amountSize){
+                amountSize = String.valueOf(transaction.getAmount()).length();
+            }
+            if(String.valueOf(transaction.getBalanceAfterTransaction()).length() > balanceSize){
+                bankNameSize = String.valueOf(transaction.getBalanceAfterTransaction()).length();
+            }
+        }
+
+        int cover = bankNameSize + sourceCardNumberSize + destinationCardNumberSize + amountSize + dateSize + balanceSize + trackingNoSize + referenceNoSize + 78;
+        System.out.print("+");
         for(int i = 0 ; i < cover ; i++){
             System.out.print("-");
         }
         System.out.println("+");
 
-        for(Account account : accounts){
-            System.out.format("| %" + (-(idSize + 5)) + "s" , account.getCreditCard().getId());
-            System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , account.getCreditCard().getCardNumber());
-            System.out.format("| %" + (-(bankNameSize + 15)) + "s" , account.getBankBranch().getBankName());
-            System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , account.getBankBranch().getBranchCode());
-            System.out.format("| %" + (-(cVV2Size + 5)) + "s" , account.getCreditCard().getCVV2());
-            System.out.format("| %" + (-(expirationDateSize + 5)) + "s" , account.getCreditCard().getExpirationDate());
-            System.out.format("| %" + (-(accountNumberSize + 15)) + "s" , account.getAccountNumber());
-            System.out.format("| %" + (-(firstPasswordSize + 10)) + "s" , account.getCreditCard().getFirstPassword());
-            System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , account.getCreditCard().getSecondPassword());
-            System.out.format("| %" + (-(balanceSize + 5)) + "s|\n" , account.getCreditCard().getBalance());
-        }
+        System.out.format("| %" + (-(bankNameSize + 5)) + "s" , "bankName");
+        System.out.format("| %" + (-(sourceCardNumberSize + 5)) + "s" , "source card number");
+        System.out.format("| %" + (-(destinationCardNumberSize + 5)) + "s" , "destination card number");
+        System.out.format("| %" + (-(amountSize + 5)) + "s" , "amount");
+        System.out.format("| %" + (-(dateSize + 5)) + "s" , "date");
+        System.out.format("| %" + (-(balanceSize + 20)) + "s" , "balance after transaction");
+        System.out.format("| %" + (-(trackingNoSize + 5)) + "s" , "tracking No");
+        System.out.format("| %" + (-(referenceNoSize + 5)) + "s |\n" , "reference No");
 
+        System.out.print("+");
+        for(int i = 0 ; i < cover ; i++){
+            System.out.print("-");
+        }
+        System.out.println("+");
+
+        for(Transaction transaction : transactions){
+            System.out.format("| %" + (-(bankNameSize + 5)) + "s" , transaction.getBankName());
+            System.out.format("| %" + (-(sourceCardNumberSize + 5)) + "s" , transaction.getSourceCardNumber());
+            System.out.format("| %" + (-(destinationCardNumberSize + 7)) + "s" , transaction.getDestinationCardNumber());
+            System.out.format("| %" + (-(amountSize + 5)) + "s" , transaction.getAmount());
+            System.out.format("| %" + (-(dateSize + 5)) + "s" , transaction.getDate());
+            System.out.format("| %" + (-(balanceSize + 25)) + "s" , transaction.getBalanceAfterTransaction());
+            System.out.format("| %" + (-(trackingNoSize + 5)) + "s" , transaction.getTrackingNo());
+            System.out.format("| %" + (-(referenceNoSize + 5)) + "s | \n" , transaction.getTrackingNo());
+        }
 
         System.out.print("+");
         for(int i = 0 ; i < cover ; i++){
@@ -179,5 +250,4 @@ public class DemonstrateInfos {
         }
         System.out.println("+");
     }
-
 }

@@ -7,4 +7,6 @@ import domain.Transaction;
 public interface TransactionService extends BaseService<Transaction, Long> {
 
     void newTransaction(CreditCard creditCard, long destinationCardNumber, double amount);
+
+    void seeHistory();
 }

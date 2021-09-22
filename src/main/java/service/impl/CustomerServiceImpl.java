@@ -90,7 +90,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 ApplicationContext.getDemonstrationMenus().customerMenu();
                 int choice = new Scanner(System.in).nextInt();
                 if(choice == 1){
-                    //TODO create a method for customer to see transactions history
+                   ApplicationContext.getTransactionService().seeHistory();
                 }else if(choice == 2){
                     ApplicationContext.getAccountService().openAccount();
                 }else if (choice == 3){
