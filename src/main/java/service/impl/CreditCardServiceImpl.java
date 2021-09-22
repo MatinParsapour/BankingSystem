@@ -21,7 +21,7 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         long cardNumber = 0;
         while(true){
             cardNumberString = "";
-            for(int i = 0 ; i<= 16; i++){
+            for(int i = 0 ; i< 16; i++){
                 cardNumberString += random.nextInt(9);
             }
             cardNumber = Long.parseLong(cardNumberString);
@@ -37,7 +37,7 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     public int createCVV2() {
         Random random = new Random();
         String cVV2String = "";
-        for(int i = 0 ; i<=4 ; i++){
+        for(int i = 0 ; i<4 ; i++){
             cVV2String += random.nextInt(9);
         }
         int cVV2 = Integer.parseInt(cVV2String);
@@ -50,7 +50,7 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         String shebaNumberString ="";
         while(true){
             shebaNumberString = "IR";
-            for(int i = 0 ; i<= 16; i++){
+            for(int i = 0 ; i< 16; i++){
                 shebaNumberString += random.nextInt(9);
             }
             CreditCard creditCard = repository.findCreditCardByShebaNumber(shebaNumberString);
@@ -65,7 +65,7 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     public int createFirstPassword() {
         Random random = new Random();
         String firstPassword = "";
-        for(int i = 0 ; i<=4 ; i++){
+        for(int i = 0 ; i < 4 ; i++){
             firstPassword += random.nextInt(9);
         }
         int cVV2 = Integer.parseInt(firstPassword);
@@ -88,6 +88,26 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
             getDestinationCardNumber(sourceCard);
         }
 
+    }
+
+    @Override
+    public void changeFirstPassword() {
+        System.out.print("Enter id : ");
+        long id = new Scanner(System.in).nextLong();
+        CreditCard card = repository.findCreditCardById(id);
+        if(card == null){
+            System.out.println("id is incorrect");
+        }else{
+            System.out.println("Enter new password : ");
+            int password = new Scanner(System.in).nextInt();
+            if(String.valueOf(password).length() == 4){
+                card.setFirstPassword(password);
+                createOrUpdate(card);
+                System.out.println("Your password successfully changed");
+            }else{
+                System.out.println("Your password should be 4-digit");
+            }
+        }
     }
 
     private void getDestinationCardNumber(CreditCard sourceCard) {
@@ -155,4 +175,6 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         ApplicationContext.getTransactionService().newTransaction(sourceCard, destinationCardNumber, amount);
         createOrUpdate(destinationCard);
     }
+
+
 }
