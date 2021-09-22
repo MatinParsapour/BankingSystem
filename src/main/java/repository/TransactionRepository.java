@@ -4,4 +4,9 @@ import base.repository.BaseRepository;
 import domain.Transaction;
 
 public interface TransactionRepository extends BaseRepository<Transaction,Long> {
+
+    Transaction findTransactionByTrackingNo(int trackingNo);
+
+    Transaction findTransactionByReferenceNo(long referenceNo);
+
 }

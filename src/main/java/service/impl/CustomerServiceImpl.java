@@ -414,7 +414,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                     ApplicationContext.getDemonstrationMenus().customerCardsMenu();
                     int choice = new Scanner(System.in).nextInt();
                     if(choice == 1){
-                        //TODO create a method for customer to card to card
+                        ApplicationContext.getCreditCardService().cardToCard();
                     }else if (choice == 2){
                         //TODO create a method for customer to close his/her account
                     }else if (choice == 3){

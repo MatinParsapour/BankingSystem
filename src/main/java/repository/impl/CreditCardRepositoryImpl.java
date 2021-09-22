@@ -3,6 +3,7 @@ package repository.impl;
 import base.repository.BaseRepositoryImpl;
 import domain.CreditCard;
 import repository.CreditCardRepository;
+import util.SecurityUser;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -37,6 +38,21 @@ public class CreditCardRepositoryImpl extends BaseRepositoryImpl<CreditCard, Lon
                     "FROM CreditCard c " +
                     "WHERE c.shebaNumber = :shebaNumber ",CreditCard.class).
                     setParameter("shebaNumber",shebaNumberString).getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public CreditCard findCreditCardById(long id) {
+        try{
+            return entityManager.createQuery("SELECT c " +
+                    "FROM CreditCard c " +
+                    "JOIN c.account a " +
+                    "JOIN a.user u " +
+                    "WHERE c.id = :id " +
+                    "AND u.id = :userId ",CreditCard.class).
+                    setParameter("id",id).setParameter("userId", SecurityUser.getCustomer().getId()).getSingleResult();
         }catch (NoResultException exception){
             return null;
         }

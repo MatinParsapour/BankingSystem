@@ -125,7 +125,7 @@ public class DemonstrateInfos {
         int accountNumberSize = 9;
         int firstPasswordSize = 4;
         int secondPasswordSize = 6;
-        int balanceSize = 10;
+        int balanceSize = 15;
 
         for(Account account : accounts){
             if(account.getBankBranch().getBankName().length() > balanceSize){

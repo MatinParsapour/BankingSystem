@@ -37,23 +37,23 @@ public class Transaction extends BaseEntity<Long> {
     private String userSureName;
 
     @JoinColumn(name = SOURCE_CARD_NUMBER)
-    private String sourceCardNumber;
+    private long sourceCardNumber;
 
     @JoinColumn(name = DESTINATION_CARD_NUMBER)
-    private String DestinationCardNumber;
+    private long DestinationCardNumber;
 
     @JoinColumn(name = AMOUNT)
-    private int amount;
+    private double amount;
 
     @JoinColumn(name = DATE)
     private LocalDateTime date;
 
     @JoinColumn(name = BALANCE_AFTER_TRANSACTION)
-    private int balanceAfterTransaction;
+    private double balanceAfterTransaction;
 
     @JoinColumn(name = TRACKING_NO)
     private int trackingNo;
 
     @JoinColumn(name = REFERENCE_NO)
-    private int referenceNo;
+    private long referenceNo;
 }
