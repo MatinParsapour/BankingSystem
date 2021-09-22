@@ -13,5 +13,5 @@ public interface TransactionRepository extends BaseRepository<Transaction,Long> 
 
     Transaction findTransactionByReferenceNo(long referenceNo);
 
-    List<Transaction> findTransactionsBasedOnDate(LocalDateTime requestDate);
+    List<Transaction> findTransactionsBasedOnDate(LocalDateTime requestDate,long id);
 }

@@ -47,7 +47,7 @@ public class TransactionRepositoryImpl extends BaseRepositoryImpl<Transaction, L
     }
 
     @Override
-    public List<Transaction> findTransactionsBasedOnDate(LocalDateTime requestDate) {
+    public List<Transaction> findTransactionsBasedOnDate(LocalDateTime requestDate,long id) {
         try{
             return entityManager.createQuery("SELECT t " +
                     "FROM Transaction t " +
@@ -55,8 +55,12 @@ public class TransactionRepositoryImpl extends BaseRepositoryImpl<Transaction, L
                     "JOIN c.account a " +
                     "JOIN a.user u " +
                     "WHERE t.date > :date " +
-                    "AND u.id = :id ", Transaction.class).
-                    setParameter("date",requestDate).setParameter("id", SecurityUser.getCustomer().getId()).getResultList();
+                    "AND u.id = :id " +
+                    "AND c.id = :cardId ", Transaction.class)
+                    .setParameter("date",requestDate)
+                    .setParameter("id", SecurityUser.getCustomer().getId())
+                    .setParameter("cardId",id)
+                    .getResultList();
         }catch (NoResultException exception){
             return null;
         }

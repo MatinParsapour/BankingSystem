@@ -130,6 +130,9 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
             }
         }
     }
+    public CreditCard findCard(long id){
+        return repository.findCreditCardById(id);
+    }
 
     private void getDestinationCardNumber(CreditCard sourceCard) {
         System.out.print("Enter destination card number : ");

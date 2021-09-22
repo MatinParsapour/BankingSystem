@@ -41,12 +41,30 @@ public class TransactionServiceImpl extends BaseServiceImpl<Transaction,Long, Tr
         int year = year();
         int month = month();
         int day = day();
+        long id = id();
         LocalDateTime requestDate = LocalDateTime.of(year,month,day,0,0);
-        List<Transaction> transactionList = repository.findTransactionsBasedOnDate(requestDate);
+        List<Transaction> transactionList = repository.findTransactionsBasedOnDate(requestDate,id);
         if(transactionList.size() == 0){
             System.out.println("You don't have any transaction yet");
         }else{
             ApplicationContext.getDemonstrateInfos().printTransactionsHistory(transactionList);
+        }
+    }
+
+    private long id() {
+        while(true){
+            try{
+                System.out.println("Enter id of credit card you want to see history : ");
+                long id = new Scanner(System.in).nextLong();
+                CreditCard creditCard = ApplicationContext.getCreditCardService().findCard(id);
+                if(creditCard == null){
+                    System.out.println("Wrong id");
+                }else{
+                    return id;
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Wrong input");
+            }
         }
     }
 
