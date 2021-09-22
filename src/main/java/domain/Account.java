@@ -55,13 +55,13 @@ public class Account extends BaseEntity<Long> {
     @JoinColumn(name = IS_ACTIVE)
     private boolean isActive = false;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private BankBranch bankBranch;
 
-    private boolean isBlocked = false;
+    private boolean isBlocked;
 
     public Account(String firstName, String lastName, String nationalCode,
                    LocalDate birthDate, String fatherName, BankBranch bankBranch, User user) {
@@ -72,5 +72,6 @@ public class Account extends BaseEntity<Long> {
         this.fatherName = fatherName;
         this.bankBranch = bankBranch;
         this.user = user;
+        isBlocked = false;
     }
 }

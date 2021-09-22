@@ -22,11 +22,11 @@ public class BankBranch extends BaseEntity<Long> {
     private static final String BANK_NAME = "bank_name";
     private static final String BANK_ACCOUNTS = "bank_accounts";
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = CEO,unique = true)
     private CEO cEO;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = EMPLOYEES)
     private Set<Employee> employees;
 

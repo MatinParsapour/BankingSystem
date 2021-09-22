@@ -416,7 +416,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                     if(choice == 1){
                         ApplicationContext.getCreditCardService().cardToCard();
                     }else if (choice == 2){
-                        //TODO create a method for customer to close his/her account
+                        ApplicationContext.getAccountService().closeAnAccount();
                     }else if (choice == 3){
                         //TODO create a method for customer to change his/her first password;
                     }else if (choice == 4){

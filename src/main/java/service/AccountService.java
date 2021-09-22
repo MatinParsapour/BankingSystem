@@ -18,4 +18,6 @@ public interface AccountService extends BaseService<Account,Long> {
     List<Account> findCustomerAccounts();
 
     long createAccountNumber();
+
+    void closeAnAccount();
 }

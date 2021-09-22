@@ -54,7 +54,7 @@ public class CreditCard extends BaseEntity<Long> {
     @JoinColumn(name = SECOND_PASSWORD)
     private int secondPassword;
 
-    @OneToOne(mappedBy = "creditCard",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "creditCard")
     private Account account;
 
     @JoinColumn(name = BALANCE)

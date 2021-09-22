@@ -89,4 +89,26 @@ public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRep
             }
         }
     }
+
+    @Override
+    public void closeAnAccount() {
+        System.out.print("Enter id of account you want to block : ");
+        long id = new Scanner(System.in).nextLong();
+        Account account = repository.findAccountByIdToDelete(id);
+        if(account == null){
+            System.out.println("The id is incorrect");
+        }else{
+            try{
+                System.out.println("Are you sure");
+                System.out.println("1.Yes   2.NO");
+                int choice = new Scanner(System.in).nextInt();
+                if(choice == 1){
+                    account.setBlocked(true);
+                    createOrUpdate(account);
+                }
+            }catch (InputMismatchException exception){
+                System.out.println("Wrong input");
+            }
+        }
+    }
 }

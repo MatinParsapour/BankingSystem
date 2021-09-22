@@ -23,8 +23,12 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
 
     @Override
     public Account existsByAccountNumber(int accountNumber) {
-        return entityManager.createQuery("SELECT a FROM Account a WHERE a.accountNumber =:accountNumber AND a.isBlocked = false ",Account.class).
-                setParameter("accountNumber",accountNumber).getSingleResult();
+        try{
+            return entityManager.createQuery("SELECT a FROM Account a WHERE a.accountNumber =:accountNumber AND a.isBlocked = false ",Account.class).
+                    setParameter("accountNumber",accountNumber).getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
     }
 
     @Override
@@ -54,7 +58,7 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
                     "AND b.id = :bankId",Account.class).setParameter("id",id).
                     setParameter("bankId",SecurityUser.getEmployee().getBankBranch().getId())
                     .getSingleResult();
-        }catch (InputMismatchException exception){
+        }catch (NoResultException exception){
             return null;
         }
     }
@@ -79,6 +83,19 @@ public class AccountRepositoryImpl extends BaseRepositoryImpl<Account, Long> imp
                     "WHERE a.accountNumber = :accountNumber " +
                     "AND a.isBlocked = false", Account.class).
                     setParameter("accountNumber",accountNumber).getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public Account findAccountByIdToDelete(long id) {
+        try{
+            return entityManager.createQuery("SELECT a " +
+                    "FROM Account a " +
+                    "WHERE a.id = :id " +
+                    "AND a.isBlocked = false "
+                    ,Account.class).setParameter("id",id).getSingleResult();
         }catch (NoResultException exception){
             return null;
         }

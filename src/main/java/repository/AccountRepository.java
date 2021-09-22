@@ -16,4 +16,6 @@ public interface AccountRepository extends BaseRepository<Account,Long> {
     List<Account> findCustomerAccounts();
 
     Account findAccountByAccountNumber(long accountNumber);
+
+    Account findAccountByIdToDelete(long id);
 }
