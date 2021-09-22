@@ -29,4 +29,17 @@ public class EmployeeRepositoryImpl extends BaseRepositoryImpl<Employee, Long> i
             return null;
         }
     }
+
+    @Override
+    public Employee findEmployeeByNationalCode(String nationalCode) {
+        try{
+            return entityManager.createQuery("SELECT e " +
+                    "FROM Employee e " +
+                    "WHERE e.nationalCode = :nationalCode",Employee.class).
+                    setParameter("nationalCode",nationalCode).
+                    getSingleResult();
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
 }

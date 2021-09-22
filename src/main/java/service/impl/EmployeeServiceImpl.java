@@ -37,7 +37,8 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
                     Application();
                     break;
                 }else if(choice == 3){
-                    //TODO create a method for employee to see his/her request
+                    request();
+                    break;
                 }else if(choice == 4){
                     break;
                 }else{
@@ -46,6 +47,19 @@ public class EmployeeServiceImpl extends BaseServiceImpl<Employee,Long, Employee
             }catch (InputMismatchException exception){
                 System.out.println("Wrong input");
             }
+        }
+    }
+
+    private void request() {
+        System.out.print("National code : ");
+        String nationalCode = new Scanner(System.in).next();
+        Employee employee = repository.findEmployeeByNationalCode(nationalCode);
+        if(employee.getIsEmployee() == null){
+            System.out.println("In progress");
+        }else if(employee.getIsEmployee() == false){
+            System.out.println("You rejected");
+        }else{
+            System.out.println("You're an employee");
         }
     }
 
