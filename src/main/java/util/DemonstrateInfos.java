@@ -160,7 +160,7 @@ public class DemonstrateInfos {
         System.out.println("+");
 
         for(Account account : accounts){
-            System.out.format("| %" + (-(idSize + 5)) + "s" , account.getId());
+            System.out.format("| %" + (-(idSize + 5)) + "s" , account.getCreditCard().getId());
             System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , account.getCreditCard().getCardNumber());
             System.out.format("| %" + (-(bankNameSize + 15)) + "s" , account.getBankBranch().getBankName());
             System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , account.getBankBranch().getBranchCode());

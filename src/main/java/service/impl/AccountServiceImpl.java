@@ -79,7 +79,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account,Long, AccountRep
         long accountNumber = 0;
         while(true){
             accountNumberString = "";
-            for(int i = 0 ; i<= 10; i++){
+            for(int i = 0 ; i< 10; i++){
                 accountNumberString += random.nextInt(9);
             }
             accountNumber = Long.parseLong(accountNumberString);
