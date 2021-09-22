@@ -94,17 +94,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                 }else if (choice == 3){
                     //TODO create a method for customers to see status of their account
                 }else if (choice == 4){
-                    //TODO create a method for customer to close his/her accounts
-                }else if(choice == 5){
-                    //TODO create a method for customer to card to card
-                }else if(choice == 6){
-                    //TODO create a method for customer to see balance of his/her account
-                }else if (choice == 7){
                     int nextMove = logOut();
                     if(nextMove == 1){
                         break;
                     }
-                }else if(choice == 8){
+                }else if(choice == 5){
                     break;
                 }else{
                     System.out.println("Wrong input");
