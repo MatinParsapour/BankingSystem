@@ -110,6 +110,26 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         }
     }
 
+    @Override
+    public void setOrChangeSecondPassword() {
+        System.out.print("Enter id : ");
+        long id = new Scanner(System.in).nextLong();
+        CreditCard card = repository.findCreditCardById(id);
+        if(card == null){
+            System.out.println("id is incorrect");
+        }else{
+            System.out.println("Enter password : ");
+            int password = new Scanner(System.in).nextInt();
+            if(String.valueOf(password).length() == 6){
+                card.setSecondPassword(password);
+                createOrUpdate(card);
+                System.out.println("Your password successfully changed");
+            }else{
+                System.out.println("Your password should be 6-digit");
+            }
+        }
+    }
+
     private void getDestinationCardNumber(CreditCard sourceCard) {
         System.out.print("Enter destination card number : ");
         long destinationCardNumber = new Scanner(System.in).nextLong();

@@ -18,4 +18,6 @@ public interface CreditCardService extends BaseService<CreditCard, Long> {
     void cardToCard();
 
     void changeFirstPassword();
+
+    void setOrChangeSecondPassword();
 }

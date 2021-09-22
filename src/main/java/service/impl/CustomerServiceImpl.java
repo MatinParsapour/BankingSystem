@@ -420,7 +420,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                     }else if (choice == 3){
                         ApplicationContext.getCreditCardService().changeFirstPassword();
                     }else if (choice == 4){
-                        //TODO create a method for customer to change or set his/her second password
+                        ApplicationContext.getCreditCardService().setOrChangeSecondPassword();
                     }else if(choice == 5){
                         break;
                     }else{
