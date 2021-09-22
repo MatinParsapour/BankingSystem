@@ -179,7 +179,19 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         if(sourceCard.getSecondPassword() == secondPassword){
             doTransaction(sourceCard, destinationCardNumber, destinationCard, amount);
         }else{
-            System.out.println("Second password is incorrect");
+            System.out.println("Password is wrong");
+            for(int i = 2 ; i > 0 ; i--){
+                secondPassword = new Scanner(System.in).nextInt();
+                if(sourceCard.getSecondPassword() == secondPassword){
+                    doTransaction(sourceCard, destinationCardNumber, destinationCard, amount);
+                }else{
+                    System.out.println("password is wrong");
+                }if(i == 1){
+                    sourceCard.getAccount().setBlocked(true);
+                    createOrUpdate(sourceCard);
+                    System.out.println("Your card is blocked");
+                }
+            }
         }
     }
 
