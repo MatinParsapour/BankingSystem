@@ -9,4 +9,6 @@ public interface CustomerRepository extends BaseRepository<Customer, Long> {
     Customer findUserByUserName(String userName);
 
     Customer findUserByUserNameAndPassword(String userName, String password);
+
+    Customer findCustomerByNationalCode(String nationalCode);
 }

@@ -2,6 +2,7 @@ package repository.impl;
 
 import base.repository.BaseRepositoryImpl;
 import domain.Customer;
+import domain.Employee;
 import domain.User;
 import repository.CustomerRepository;
 import util.CriteriaCustom;
@@ -47,6 +48,19 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer, Long> i
                                     customerRoot.get("password"),password)));
             Customer customer = entityManager.createQuery(criteriaQuery).getSingleResult();
             return customer;
+        }catch (NoResultException exception){
+            return null;
+        }
+    }
+
+    @Override
+    public Customer findCustomerByNationalCode(String nationalCode) {
+        try{
+            return entityManager.createQuery("SELECT c " +
+                    "FROM Customer c " +
+                    "WHERE c.nationalCode = :nationalCode",Customer.class).
+                    setParameter("nationalCode",nationalCode).
+                    getSingleResult();
         }catch (NoResultException exception){
             return null;
         }
