@@ -33,6 +33,8 @@ public class DemonstrationMenus {
         System.out.println("+-----------------------------+");
         System.out.println("|          1.Enter            |");
         System.out.println("|        2.َApplication        |");
+        System.out.println("|       3.Your request        |");
+        System.out.println("|           4.Exit            |");
         System.out.println("+-----------------------------+");
     }
 

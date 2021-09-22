@@ -24,7 +24,7 @@ public class Employee extends User{
     private int employeeCode;
 
     @JoinColumn(name = IS_EMPLOYEE)
-    private boolean isEmployee;
+    private Boolean isEmployee;
 
     @ManyToOne
     private BankBranch bankBranch;

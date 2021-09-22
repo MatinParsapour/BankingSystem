@@ -6,6 +6,7 @@ import repository.CreditCardRepository;
 import service.CreditCardService;
 import util.ApplicationContext;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -163,9 +164,9 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
 
     private void getExpirationDate(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
         System.out.print("Enter year of expiration date : ");
-        int year = new Scanner(System.in).nextInt();
+        int year = year();
         System.out.print("Enter month of expiration date : ");
-        int month = new Scanner(System.in).nextInt();
+        int month = month();
         if(sourceCard.getExpirationDate().getYear() == year && sourceCard.getExpirationDate().getMonth().getValue() == month){
             getPassword(sourceCard, destinationCardNumber, destinationCard, amount);
         }else {
@@ -208,5 +209,40 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         createOrUpdate(destinationCard);
     }
 
+    private int year(){
+        while (true) {
+            try {
+                System.out.print("Year: ");
+                int year = new Scanner(System.in).nextInt();
+                while (String.valueOf(year).length() != 4) {
+                    System.out.println("This is not a valid number for year");
+                    System.out.println("Try again");
+                    year = new Scanner(System.in).nextInt();
+                }
+                return year;
+            } catch (InputMismatchException exception) {
+                System.out.println("You should enter number");
+                System.out.println("Try again");
+            }
+        }
+    }
+
+    private int month() {
+        while (true) {
+            try {
+                System.out.print("Month : ");
+                int month = new Scanner(System.in).nextInt();
+                while (month < 1 || month > 12) {
+                    System.out.println("This is not a valid number for month");
+                    System.out.println("Try again");
+                    month = new Scanner(System.in).nextInt();
+                }
+                return month;
+            } catch (InputMismatchException exception) {
+                System.out.println("You should enter number");
+                System.out.println("Try again");
+            }
+        }
+    }
 
 }
