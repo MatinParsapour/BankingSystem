@@ -85,50 +85,74 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         if(sourceCard == null){
             System.out.println("The id is incorrect");
         }else{
-            System.out.print("Enter destination card number : ");
-            long destinationCardNumber = new Scanner(System.in).nextLong();
-            CreditCard destinationCard = repository.findCreditCardByCardNumber(destinationCardNumber);
-            if(destinationCard == null){
-                System.out.println("Destination card number is incorrect");
-            }else{
-                System.out.print("Enter amount : ");
-                double amount = new Scanner(System.in).nextDouble();
-                if(sourceCard.getBalance() > amount + .6){
-                    System.out.print("Enter CVV2 : ");
-                    int cVV2 = new Scanner(System.in).nextInt();
-                    if(sourceCard.getCVV2() == cVV2){
-                        System.out.print("Enter year of expiration date : ");
-                        int year = new Scanner(System.in).nextInt();
-                        System.out.print("Enter month of expiration date : ");
-                        int month = new Scanner(System.in).nextInt();
-                        if(sourceCard.getExpirationDate().getYear() == year && sourceCard.getExpirationDate().getMonth().getValue() == month){
-                            System.out.print("Enter second password : ");
-                            int secondPassword = new Scanner(System.in).nextInt();
-                            if(sourceCard.getSecondPassword() == secondPassword){
-                                double amountPlusWage = amount + .6;
-                                double sourceCardCurrentBalance = sourceCard.getBalance();
-                                sourceCardCurrentBalance -= amountPlusWage;
-                                sourceCard.setBalance(sourceCardCurrentBalance);
-                                createOrUpdate(sourceCard);
-                                double destinationCardCurrentBalance = destinationCard.getBalance();
-                                destinationCardCurrentBalance += amount;
-                                destinationCard.setBalance(destinationCardCurrentBalance);
-                                ApplicationContext.getTransactionService().newTransaction(sourceCard,destinationCardNumber,amount);
-                                createOrUpdate(destinationCard);
-                            }else{
-                                System.out.println("Second password is incorrect");
-                            }
-                        }else {
-                            System.out.println("the date is incorrect");
-                        }
-                    }else{
-                        System.out.println("CVV2 is incorrect");
-                    }
-                }else{
-                    System.out.println("You don't have enough balance");
-                }
-            }
+            getDestinationCardNumber(sourceCard);
         }
 
+    }
+
+    private void getDestinationCardNumber(CreditCard sourceCard) {
+        System.out.print("Enter destination card number : ");
+        long destinationCardNumber = new Scanner(System.in).nextLong();
+        CreditCard destinationCard = repository.findCreditCardByCardNumber(destinationCardNumber);
+        if(destinationCard == null){
+            System.out.println("Destination card number is incorrect");
+        }else{
+            getAmount(sourceCard, destinationCardNumber, destinationCard);
+        }
+    }
+
+    private void getAmount(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard) {
+        System.out.print("Enter amount : ");
+        double amount = new Scanner(System.in).nextDouble();
+        if(sourceCard.getBalance() > amount + .6){
+            getCVV2(sourceCard, destinationCardNumber, destinationCard, amount);
+        }else{
+            System.out.println("You don't have enough balance");
+        }
+    }
+
+    private void getCVV2(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
+        System.out.print("Enter CVV2 : ");
+        int cVV2 = new Scanner(System.in).nextInt();
+        if(sourceCard.getCVV2() == cVV2){
+            getExpirationDate(sourceCard, destinationCardNumber, destinationCard, amount);
+        }else{
+            System.out.println("CVV2 is incorrect");
+        }
+    }
+
+    private void getExpirationDate(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
+        System.out.print("Enter year of expiration date : ");
+        int year = new Scanner(System.in).nextInt();
+        System.out.print("Enter month of expiration date : ");
+        int month = new Scanner(System.in).nextInt();
+        if(sourceCard.getExpirationDate().getYear() == year && sourceCard.getExpirationDate().getMonth().getValue() == month){
+            getPassword(sourceCard, destinationCardNumber, destinationCard, amount);
+        }else {
+            System.out.println("the date is incorrect");
+        }
+    }
+
+    private void getPassword(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
+        System.out.print("Enter second password : ");
+        int secondPassword = new Scanner(System.in).nextInt();
+        if(sourceCard.getSecondPassword() == secondPassword){
+            doTransaction(sourceCard, destinationCardNumber, destinationCard, amount);
+        }else{
+            System.out.println("Second password is incorrect");
+        }
+    }
+
+    private void doTransaction(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
+        double amountPlusWage = amount + .6;
+        double sourceCardCurrentBalance = sourceCard.getBalance();
+        sourceCardCurrentBalance -= amountPlusWage;
+        sourceCard.setBalance(sourceCardCurrentBalance);
+        createOrUpdate(sourceCard);
+        double destinationCardCurrentBalance = destinationCard.getBalance();
+        destinationCardCurrentBalance += amount;
+        destinationCard.setBalance(destinationCardCurrentBalance);
+        ApplicationContext.getTransactionService().newTransaction(sourceCard, destinationCardNumber, amount);
+        createOrUpdate(destinationCard);
     }
 }
