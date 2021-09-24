@@ -118,7 +118,8 @@ public class DemonstrateInfos {
     }
 
     public void printUserAccounts(List<Account> accounts){
-        int idSize = 5;
+        int cardIdSize = 5;
+        int accountIdSize = 5;
         int cardNumberSize = 16;
         int bankNameSize = 0;
         int bankCodeSize = 4;
@@ -135,17 +136,18 @@ public class DemonstrateInfos {
             }
         }
 
-        int cover = idSize + cardNumberSize + bankNameSize + bankCodeSize + cVV2Size + expirationDateSize + accountNumberSize + firstPasswordSize + secondPasswordSize + balanceSize + 99;
+        int cover = cardIdSize + accountIdSize + cardNumberSize + bankNameSize + bankCodeSize + cVV2Size + expirationDateSize + accountNumberSize + firstPasswordSize + secondPasswordSize + balanceSize + 106;
 
 
-        printUserAccountsHeader(idSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover);
+        printUserAccountsHeader(cardIdSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover, accountIdSize);
 
-        printUserAccountsFooter(accounts, idSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover);
+        printUserAccountsFooter(accounts, cardIdSize, cardNumberSize, bankNameSize, bankCodeSize, cVV2Size, expirationDateSize, accountNumberSize, firstPasswordSize, secondPasswordSize, balanceSize, cover, accountIdSize);
     }
 
-    private void printUserAccountsFooter(List<Account> accounts, int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover) {
+    private void printUserAccountsFooter(List<Account> accounts, int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover, int accountIdSize) {
         for(Account account : accounts){
             System.out.format("| %" + (-(idSize + 5)) + "s" , account.getCreditCard().getId());
+            System.out.format("| %" + (-(accountIdSize + 5)) + "s" , account.getId());
             System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , account.getCreditCard().getCardNumber());
             System.out.format("| %" + (-(bankNameSize + 15)) + "s" , account.getBankBranch().getBankName());
             System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , account.getBankBranch().getBranchCode());
@@ -165,14 +167,15 @@ public class DemonstrateInfos {
         System.out.println("+");
     }
 
-    private void printUserAccountsHeader(int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover) {
+    private void printUserAccountsHeader(int idSize, int cardNumberSize, int bankNameSize, int bankCodeSize, int cVV2Size, int expirationDateSize, int accountNumberSize, int firstPasswordSize, int secondPasswordSize, int balanceSize, int cover, int accountIdSize) {
         System.out.print("+");
         for(int i = 0; i < cover; i++){
             System.out.print("-");
         }
         System.out.println("+");
 
-        System.out.format("| %" + (-(idSize + 5)) + "s" , "id");
+        System.out.format("| %" + (-(idSize + 5)) + "s" , "cardid");
+        System.out.format("| %" + (-(accountIdSize + 5)) + "s" , "accountid");
         System.out.format("| %" + (-(cardNumberSize + 5)) + "s" , "cardnumber");
         System.out.format("| %" + (-(bankNameSize + 15)) + "s" , "bankname");
         System.out.format("| %" + (-(bankCodeSize + 5)) + "s" , "brankcode");
