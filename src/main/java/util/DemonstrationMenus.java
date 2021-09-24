@@ -49,9 +49,10 @@ public class DemonstrationMenus {
         System.out.println("+----------------------------------------+");
         System.out.println("|             1.Card to card             |");
         System.out.println("|            2.Close account             |");
-        System.out.println("|        3.change first password         |");
-        System.out.println("|     4.change or set second password    |");
-        System.out.println("|                 5.Exit                 |");
+        System.out.println("|           3.Increase balance           |");
+        System.out.println("|        4.change first password         |");
+        System.out.println("|     5.change or set second password    |");
+        System.out.println("|                 6.Exit                 |");
         System.out.println("+----------------------------------------+");
     }
 

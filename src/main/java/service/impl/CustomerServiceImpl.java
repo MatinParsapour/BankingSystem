@@ -16,29 +16,29 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, CustomerRepository> implements CustomerService {
+public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long, CustomerRepository> implements CustomerService {
     public CustomerServiceImpl(CustomerRepository repository) {
         super(repository);
     }
 
     @Override
     public void firstMenu() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 ApplicationContext.getDemonstrationMenus().customerFirstMenu();
                 int choice = new Scanner(System.in).nextInt();
-                if(choice == 1){
+                if (choice == 1) {
                     enter();
                     break;
-                }else if(choice == 2){
+                } else if (choice == 2) {
                     fillTheForm();
                     break;
-                }else if(choice == 3){
+                } else if (choice == 3) {
                     break;
-                }else{
+                } else {
                     System.out.println("Wrong input");
                 }
-            }catch (InputMismatchException exception){
+            } catch (InputMismatchException exception) {
                 System.out.println("Wrong input");
             }
         }
@@ -46,9 +46,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
 
     @Override
     public void fillTheForm() {
-        Customer customer = new Customer(firstName(),lastName(),email(null),
-                phoneNumber(null),nationalCode(),birthday(),
-                userName(),password());
+        Customer customer = new Customer(firstName(), lastName(), email(null),
+                phoneNumber(null), nationalCode(), birthday(),
+                userName(), password());
         createOrUpdate(customer);
         enter();
     }
@@ -85,27 +85,27 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
 
     @Override
     public void customerMenu() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 ApplicationContext.getDemonstrationMenus().customerMenu();
                 int choice = new Scanner(System.in).nextInt();
-                if(choice == 1){
-                   ApplicationContext.getTransactionService().seeHistory();
-                }else if(choice == 2){
+                if (choice == 1) {
+                    ApplicationContext.getTransactionService().seeHistory();
+                } else if (choice == 2) {
                     ApplicationContext.getAccountService().openAccount();
-                }else if (choice == 3){
+                } else if (choice == 3) {
                     yourCards();
-                }else if (choice == 4){
+                } else if (choice == 4) {
                     int nextMove = logOut();
-                    if(nextMove == 1){
+                    if (nextMove == 1) {
                         break;
                     }
-                }else if(choice == 5){
+                } else if (choice == 5) {
                     break;
-                }else{
+                } else {
                     System.out.println("Wrong input");
                 }
-            }catch (InputMismatchException exception){
+            } catch (InputMismatchException exception) {
                 System.out.println("Wrong input");
             }
         }
@@ -125,7 +125,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                     matcher = pattern.matcher(nationalCode);
                 }
                 Customer customer = repository.findCustomerByNationalCode(nationalCode);
-                if(customer == null){
+                if (customer == null) {
                     System.out.println("1.Acceptable         2.Unacceptable");
                     int choice = new Scanner(System.in).nextInt();
                     if (choice == 1) {
@@ -133,7 +133,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
                     } else {
                         System.out.println("Now try again");
                     }
-                }else{
+                } else {
                     System.out.println("There's no way two person have same national code");
                 }
             } catch (InputMismatchException exception) {
@@ -387,20 +387,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
 
     @Override
     public int logOut() {
-        while(true){
-            try{
+        while (true) {
+            try {
                 System.out.println("Are you sure");
                 System.out.println("1.Yes   2.NO");
                 int choice = new Scanner(System.in).nextInt();
-                if(choice == 1){
+                if (choice == 1) {
                     delete(SecurityUser.getCustomer());
                     return 1;
-                }else if(choice == 2){
+                } else if (choice == 2) {
                     return 2;
-                }else{
+                } else {
                     System.out.println("Choose between options");
                 }
-            }catch (InputMismatchException exception){
+            } catch (InputMismatchException exception) {
                 System.out.println("Invalid entry");
             }
         }
@@ -408,30 +408,32 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer,Long, Customer
 
     @Override
     public void yourCards() {
-        while(true){
+        while (true) {
             List<Account> accounts = ApplicationContext.getAccountRepositoryImpl().findCustomerAccounts();
-            if(accounts.size() == 0){
+            if (accounts.size() == 0) {
                 System.out.println("You don't have any account yet");
                 break;
-            }else{
-                try{
+            } else {
+                try {
                     ApplicationContext.getDemonstrateInfos().printUserAccounts(accounts);
                     ApplicationContext.getDemonstrationMenus().customerCardsMenu();
                     int choice = new Scanner(System.in).nextInt();
-                    if(choice == 1){
+                    if (choice == 1) {
                         ApplicationContext.getCreditCardService().cardToCard();
-                    }else if (choice == 2){
+                    } else if (choice == 2) {
                         ApplicationContext.getAccountService().closeAnAccount();
-                    }else if (choice == 3){
+                    } else if (choice == 3) {
+                        ApplicationContext.getCreditCardService().increaseBalance();
+                    } else if (choice == 4) {
                         ApplicationContext.getCreditCardService().changeFirstPassword();
-                    }else if (choice == 4){
+                    } else if (choice == 5) {
                         ApplicationContext.getCreditCardService().setOrChangeSecondPassword();
-                    }else if(choice == 5){
+                    } else if (choice == 6) {
                         break;
-                    }else{
+                    } else {
                         System.out.println("Wrong input");
                     }
-                }catch (InputMismatchException exception){
+                } catch (InputMismatchException exception) {
                     System.out.println("Wrong input");
                 }
             }

@@ -248,4 +248,19 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         }
     }
 
+    public void increaseBalance() {
+        System.out.print("Enter id : ");
+        long id = new Scanner(System.in).nextLong();
+        CreditCard card = repository.findCreditCardById(id);
+        if(card == null){
+            System.out.println("Card id is incorrect");
+        }else{
+            System.out.print("Enter amount : ");
+            double amount = new Scanner(System.in).nextDouble();
+            double currentBalance = card.getBalance();
+            double nextBalance = currentBalance + amount;
+            card.setBalance(nextBalance);
+            createOrUpdate(card);
+        }
+    }
 }
