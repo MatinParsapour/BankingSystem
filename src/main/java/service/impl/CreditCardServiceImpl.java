@@ -18,10 +18,9 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     @Override
     public long createCreditCardNumber() {
         Random random = new Random();
-        String cardNumberString ="";
         long cardNumber = 0;
         while(true){
-            cardNumberString = "";
+            String cardNumberString = "";
             for(int i = 0 ; i< 16; i++){
                 cardNumberString += random.nextInt(10);
             }
@@ -53,13 +52,12 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     @Override
     public String createShebaNumber() {
         Random random = new Random();
-        String shebaNumberString ="";
         while(true){
-            shebaNumberString = "IR";
+            String shebaNumberString = "IR";
             for(int i = 0 ; i< 16; i++){
                 shebaNumberString += random.nextInt(10);
             }
-            if(shebaNumberString.length() == 16){
+            if(shebaNumberString.length() == 18){
                 CreditCard creditCard = repository.findCreditCardByShebaNumber(shebaNumberString);
                 if(creditCard == null){
                     return shebaNumberString;
