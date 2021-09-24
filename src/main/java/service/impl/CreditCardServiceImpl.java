@@ -174,9 +174,9 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     }
 
     private void getExpirationDate(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
-        System.out.print("Enter year of expiration date : ");
+        System.out.println("Enter year of expiration date : ");
         int year = year();
-        System.out.print("Enter month of expiration date : ");
+        System.out.println("Enter month of expiration date : ");
         int month = month();
         if(sourceCard.getExpirationDate().getYear() == year && sourceCard.getExpirationDate().getMonth().getValue() == month){
             getPassword(sourceCard, destinationCardNumber, destinationCard, amount);
