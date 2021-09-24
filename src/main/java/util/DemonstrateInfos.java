@@ -155,7 +155,11 @@ public class DemonstrateInfos {
             System.out.format("| %" + (-(expirationDateSize + 5)) + "s" , account.getCreditCard().getExpirationDate());
             System.out.format("| %" + (-(accountNumberSize + 15)) + "s" , account.getAccountNumber());
             System.out.format("| %" + (-(firstPasswordSize + 10)) + "s" , account.getCreditCard().getFirstPassword());
-            System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , account.getCreditCard().getSecondPassword());
+            if(account.getCreditCard().getSecondPassword() ==0){
+                System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , "");
+            }else{
+                System.out.format("| %" + (-(secondPasswordSize + 10)) + "s" , account.getCreditCard().getSecondPassword());
+            }
             System.out.format("| %" + (-(balanceSize + 5)) + "s|\n" , account.getCreditCard().getBalance());
         }
 
