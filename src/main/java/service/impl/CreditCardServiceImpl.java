@@ -23,26 +23,31 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         while(true){
             cardNumberString = "";
             for(int i = 0 ; i< 16; i++){
-                cardNumberString += random.nextInt(9);
+                cardNumberString += random.nextInt(10);
             }
-            cardNumber = Long.parseLong(cardNumberString);
-            CreditCard creditCard = repository.findCreditCardByCardNumber(cardNumber);
-            if(creditCard == null){
-                break;
+            if(cardNumberString.length()==16){
+                cardNumber = Long.parseLong(cardNumberString);
+                CreditCard creditCard = repository.findCreditCardByCardNumber(cardNumber);
+                if(creditCard == null){
+                    return cardNumber;
+                }
             }
         }
-        return cardNumber;
     }
 
     @Override
     public int createCVV2() {
         Random random = new Random();
-        String cVV2String = "";
-        for(int i = 0 ; i<4 ; i++){
-            cVV2String += random.nextInt(9);
+        while(true){
+            String cVV2String = "";
+            for(int i = 0 ; i<4 ; i++){
+                cVV2String += random.nextInt(10);
+            }
+            if(cVV2String.length()==4){
+                int cVV2 = Integer.parseInt(cVV2String);
+                return cVV2;
+            }
         }
-        int cVV2 = Integer.parseInt(cVV2String);
-        return cVV2;
     }
 
     @Override
@@ -52,25 +57,30 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
         while(true){
             shebaNumberString = "IR";
             for(int i = 0 ; i< 16; i++){
-                shebaNumberString += random.nextInt(9);
+                shebaNumberString += random.nextInt(10);
             }
-            CreditCard creditCard = repository.findCreditCardByShebaNumber(shebaNumberString);
-            if(creditCard == null){
-                break;
+            if(shebaNumberString.length() == 16){
+                CreditCard creditCard = repository.findCreditCardByShebaNumber(shebaNumberString);
+                if(creditCard == null){
+                    return shebaNumberString;
+                }
             }
         }
-        return shebaNumberString;
     }
 
     @Override
     public int createFirstPassword() {
         Random random = new Random();
-        String firstPassword = "";
-        for(int i = 0 ; i < 4 ; i++){
-            firstPassword += random.nextInt(9);
+        while (true){
+            String firstPasswordString = "";
+            for(int i = 0 ; i < 4 ; i++){
+                firstPasswordString += random.nextInt(10);
+            }
+            if(firstPasswordString.length()==4){
+                int firstPassword = Integer.parseInt(firstPasswordString);
+                return firstPassword;
+            }
         }
-        int cVV2 = Integer.parseInt(firstPassword);
-        return cVV2;
     }
 
     @Override
