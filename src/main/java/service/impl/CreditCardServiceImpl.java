@@ -188,8 +188,10 @@ public class CreditCardServiceImpl extends BaseServiceImpl<CreditCard,Long, Cred
     private void getPassword(CreditCard sourceCard, long destinationCardNumber, CreditCard destinationCard, double amount) {
         System.out.print("Enter second password : ");
         int secondPassword = new Scanner(System.in).nextInt();
-        if(sourceCard.getSecondPassword() == secondPassword){
+        if(sourceCard.getSecondPassword() == secondPassword && secondPassword != 0){
             doTransaction(sourceCard, destinationCardNumber, destinationCard, amount);
+        }else if(sourceCard.getSecondPassword()==0){
+            System.out.println("Password is wrong");
         }else{
             System.out.println("Password is wrong");
             for(int i = 2 ; i > 0 ; i--){
